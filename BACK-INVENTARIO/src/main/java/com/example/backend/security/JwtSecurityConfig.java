@@ -23,27 +23,36 @@ public class JwtSecurityConfig {
     private final JwtUnauthorizedEntryPoint unauthorizedHandler;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http
-                .csrf(csrf -> csrf.disable())
-                .cors(Customizer.withDefaults())
-                .authorizeRequests(auth -> auth
-                        .antMatchers("/auth/generate-token", "/usuarios/guardar-admin", "/v3/api-docs/**",
-                                "/swagger-ui/**",
-                                "/swagger-ui/index.html", "/usuarios/guardar-normal")
-                        .permitAll()
-                        .antMatchers(HttpMethod.OPTIONS).permitAll()
-                        .anyRequest().authenticated())
-                .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .csrf().disable()
+                .cors().and()
+                .authorizeRequests()
+                .antMatchers(
+                        "/auth/generate-token",
+                        "/usuarios/guardar-admin",
+                        "/usuarios/guardar-normal",
+                        "/v3/api-docs/**",
+                        "/swagger-ui/**",
+                        "/swagger-ui.html"
+                ).permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(unauthorizedHandler)
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
+
+
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)

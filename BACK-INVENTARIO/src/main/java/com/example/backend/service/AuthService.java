@@ -2,7 +2,8 @@ package com.example.backend.service;
 
 
 import com.example.backend.dto.LoginRequestDTO;
-import com.example.backend.dto.TokenResponseDTO;
+import com.example.backend.dto.response.TokenResponse;
+
 import com.example.backend.entity.Usuario;
 import com.example.backend.security.JwtUtils;
 
@@ -35,7 +36,7 @@ public class AuthService   {
     private static final String MSG_USUARIO_NO_AUTORIZADO = "Usuario no autorizado";
 
 
-    public TokenResponseDTO login(LoginRequestDTO loginRequestDTO) {
+    public TokenResponse login(LoginRequestDTO loginRequestDTO) {
         validarIdentificador(loginRequestDTO.getLogin());
 
         try {
@@ -47,7 +48,7 @@ public class AuthService   {
             UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequestDTO.getLogin());
             String token = jwtUtils.generateToken(userDetails);
 
-            return new TokenResponseDTO(token);
+            return new TokenResponse(token);
 
         } catch (BadCredentialsException ex) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, MSG_CREDENCIALES_INVALIDAS, ex);

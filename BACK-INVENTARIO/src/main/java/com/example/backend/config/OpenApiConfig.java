@@ -16,8 +16,8 @@ public class OpenApiConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Security") // Título del API
-                        .version("1.0")    // Versión
+                        .title("Security")
+                        .version("1.0")
                         .description("""
                                 Documentación de la API REST del módulo **AUTH SERVICE**.
                                 Este servicio gestiona la autenticación, autorización y

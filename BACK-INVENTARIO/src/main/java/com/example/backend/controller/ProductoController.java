@@ -57,7 +57,7 @@ public class ProductoController {
     }
 
 
-    @PutMapping("/{id}")
+    @PutMapping("/actualizar")
     public ResponseEntity<Producto> actualizarProducto(
             @RequestBody ProductoDTO productoDTO) {
 
