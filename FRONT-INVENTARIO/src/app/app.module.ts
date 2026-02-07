@@ -27,8 +27,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatPaginatorModule } from '@angular/material/paginator';
 //importacion del component
 
-import { LoginComponent } from './pages/configuracion/login/login.component';
-import { HomeComponent } from './pages/configuracion/home/home.component';
+import { LoginComponent } from './features/config/login/login.component';
+import { HomeComponent } from './features/config/home/home.component';
 
 import { DashboardComponent } from './pages/admin/home-admin/home-admin.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -100,6 +100,7 @@ import { GuardarInventarioComponent } from './pages/usuario/inventario-usuario/g
 import { RegistarSalidaUsuarioComponent } from './pages/usuario/salida-usuario/registar-salida-usuario/registar-salida-usuario.component';
 import { RegistrarEntradaUsuarioComponent } from './pages/usuario/entrada-usuario/registrar-entrada-usuario/registrar-entrada-usuario.component';
 import { authInterceptorProviders } from './core/interceptors/auth.interceptor';
+import { ButtonComponent } from './shared/button/button.component';
 
 @NgModule({
   declarations: [
@@ -174,10 +175,7 @@ import { authInterceptorProviders } from './core/interceptors/auth.interceptor';
     GuardarInventarioComponent,
     RegistarSalidaUsuarioComponent,
     RegistrarEntradaUsuarioComponent,
-
-
-
-
+    ButtonComponent
   ],
   imports: [
     GoogleChartsModule,

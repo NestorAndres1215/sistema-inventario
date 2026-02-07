@@ -1,10 +1,7 @@
 export class UsuarioValidator {
   static esUsuarioValido(usuario: any): boolean {
     if (!usuario) return false;
-
     const { username, email, password } = usuario;
-
-    // Validaciones básicas
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const usernameValido = typeof username === 'string' && username.trim().length >= 3;
     const emailValido = emailRegex.test(email);

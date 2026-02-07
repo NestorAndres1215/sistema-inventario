@@ -1,5 +1,5 @@
 export class ReclamoValidator {
-  /** Valida un objeto reclamo */
+
   static esReclamoValido(reclamo: any): boolean {
     if (!reclamo) return false;
 
@@ -12,7 +12,6 @@ export class ReclamoValidator {
     return nombreValido && descripcionValida && fechaValida;
   }
 
-  /** Valida el mensaje de disculpas */
   static esMensajeValido(mensaje: string): boolean {
     return typeof mensaje === 'string' && mensaje.trim().length > 5;
   }

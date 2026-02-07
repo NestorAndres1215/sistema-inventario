@@ -19,11 +19,8 @@ export class AdminGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
     const isLogged = this.loginService.isLoggedIn();
-
     if (isLogged) {
-      // Usuario autenticado: impedir acceso a la página de login
       if (state.url === ROUTES.LOGIN) {
         console.info(MESSAGES.REDIRECT_LOGIN);
         this.router.navigate([ROUTES.ADMIN_HOME]);

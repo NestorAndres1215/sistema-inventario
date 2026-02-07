@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 export class ListarSalidasComponent implements OnInit {
 
   salidas: any[] = [];
+detalleSalida: any;
 
   constructor(
     private salidaService: SalidaService,

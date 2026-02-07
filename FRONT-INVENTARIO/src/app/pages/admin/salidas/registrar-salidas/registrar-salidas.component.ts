@@ -18,6 +18,8 @@ export class RegistrarSalidasComponent implements OnInit {
   productos: any[] = [];
   listaDetalleSalida: DetalleSalida[] = [];
   user: any = null; 
+producto: any;
+isLoggedIn: any;
 
   constructor(
     private fb: FormBuilder,

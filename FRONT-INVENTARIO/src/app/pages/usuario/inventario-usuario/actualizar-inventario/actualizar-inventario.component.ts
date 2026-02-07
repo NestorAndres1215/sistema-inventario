@@ -41,12 +41,10 @@ const ALERT_MESSAGES: {
 };
 
 
-// Mensajes constantes
-
 @Component({
-  selector: 'app-actualizar-producto',
-  templateUrl: './actualizar-producto.component.html',
-  styleUrls: ['./actualizar-producto.component.css']
+  selector: 'app-actualizar-inventario',
+  templateUrl: './actualizar-inventario.component.html',
+  styleUrls: ['./actualizar-inventario.component.css']
 })
 export class ActualizarInventarioComponent implements OnInit {
 

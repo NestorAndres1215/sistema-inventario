@@ -12,6 +12,7 @@ export const ALERT_MESSAGES = {
 }
 
 export interface Usuario {
+username: any;
   id: number;
   nombre?: string;
 }

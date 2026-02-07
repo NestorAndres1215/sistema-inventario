@@ -10,15 +10,12 @@ import { MESSAGES } from 'src/app/core/constants/messages.constants';
   providedIn: 'root'
 })
 export class NormalGuard implements CanActivate {
-
   constructor(
     private loginService: LoginService,
     private router: Router
   ) {}
 
   canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     const isLogged = this.loginService.isLoggedIn();

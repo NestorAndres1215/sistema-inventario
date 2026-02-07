@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginService } from '../../../core/services/login.service';
+import { ROLES } from 'src/app/core/constants/rol';
+
 
 // Constantes
 const SNACK_DURATION = 3000;
@@ -15,13 +17,6 @@ const ROUTES = {
   user: 'user-dashboard',
 };
 
-// Enum para roles
-enum UserRole {
-  ADMIN = 'ADMIN',
-  NORMAL = 'NORMAL',
-}
-
-// Interfaz para datos de login
 interface LoginData {
   login: string;
   password: string;
@@ -47,45 +42,42 @@ export class LoginComponent implements OnInit {
   formSubmit(): void {
     const { login, password } = this.loginData;
 
-    // Validación de campos vacíos
-    if (!login?.trim()) {
+    console.log(this.loginData)
+    if (!login.trim()) {
       this.showSnack(MESSAGES.requiredUsername);
       return;
     }
 
-    if (!password?.trim()) {
+    if (!password.trim()) {
       this.showSnack(MESSAGES.requiredPassword);
       return;
     }
-
-    // Petición para generar token
     this.loginService.generateToken(this.loginData).subscribe({
-      next: (data: any) => this.handleLoginSuccess(data),
-      error: () => this.showSnack(MESSAGES.invalidCredentials),
-    });
-  }
-
-  // Manejo del login exitoso
-  private handleLoginSuccess(data: any): void {
-    this.loginService.loginUser(data.token);
-
-    this.loginService.getCurrentUser().subscribe({
-      next: (user: any) => {
-        this.loginService.setUser(user);
-        const rol = user.rol.nombre
-        this.navigateByRole(rol);
+      next: (data: any) => {
+        this.loginService.loginUser(data.token);
+        this.loginService.getCurrentUser().subscribe({
+          next: (user: any) => {
+            this.loginService.setUser(user);
+            const rol = user.authorities[0].authority
+            this.navigateByRole(rol);
+          },
+          error: () => this.loginService.logout(),
+        });
       },
-      error: () => this.loginService.logout(),
+      error: (error) => {
+        console.log(error)
+      },
     });
   }
 
-  // Navegación según rol
+
+
   private navigateByRole(role: string): void {
     switch (role) {
-      case UserRole.ADMIN:
+      case ROLES.ADMIN:
         this.router.navigate([ROUTES.admin]);
         break;
-      case UserRole.NORMAL:
+      case ROLES.NORMAL:
         this.router.navigate([ROUTES.user]);
         break;
       default:
@@ -96,7 +88,6 @@ export class LoginComponent implements OnInit {
     this.loginService.loginStatusSubjec.next(true);
   }
 
-  // Mostrar mensaje de SnackBar
   private showSnack(message: string): void {
     this.snack.open(message, 'Aceptar', { duration: SNACK_DURATION });
   }

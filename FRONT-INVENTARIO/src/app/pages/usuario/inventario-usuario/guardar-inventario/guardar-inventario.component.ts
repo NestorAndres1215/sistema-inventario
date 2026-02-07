@@ -21,9 +21,9 @@ const ALERT_MESSAGES = {
 
 
 @Component({
-  selector: 'app-crear-producto',
-  templateUrl: './crear-producto.component.html',
-  styleUrls: ['./crear-producto.component.css']
+  selector: 'app-guardar-producto',
+  templateUrl: './guardar-inventario.component.html',
+  styleUrls: ['./guardar-inventario.component.css']
 })
 export class GuardarInventarioComponent implements OnInit {
 

@@ -12,33 +12,22 @@ import { AuthValidator } from 'src/app/core/validator/auth.validator';
 export class LoginService {
   private readonly TOKEN_KEY = 'token';
   private readonly USER_KEY = 'user';
+
   public loginStatusSubject = new Subject<boolean>();
   loginStatusSubjec: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  /** ========================
-   *  AUTENTICACIÓN
-   * ======================== */
+
   generateToken(loginData: any): Observable<any> {
-    if (!AuthValidator.isLoginDataValid(loginData)) {
-      return throwError(() => new Error('Datos de inicio de sesión inválidos.'));
-    }
-
-    return this.http
-      .post(`${baserUrl}${API_ENDPOINTS.auth.generateToken}`, loginData)
-      .pipe(catchError(this.handleError));
+    return this.http.post(`${baserUrl}/auth/generate-token`, loginData);
   }
 
-  getCurrentUser(): Observable<any> {
-    return this.http
-      .get(`${baserUrl}${API_ENDPOINTS.auth.currentUser}`)
-      .pipe(catchError(this.handleError));
+
+  getCurrentUser() {
+    return this.http.get(`${baserUrl}/auth/actual-usuario`);
   }
 
-  /** ========================
-   *  SESIÓN LOCAL
-   * ======================== */
   loginUser(token: string): boolean {
     localStorage.setItem(this.TOKEN_KEY, token);
     return true;
@@ -78,11 +67,4 @@ export class LoginService {
     return user?.authorities?.[0]?.authority || null;
   }
 
-  /** ========================
-   *  MANEJO DE ERRORES
-   * ======================== */
-  private handleError(error: any) {
-    console.error('Error en el servicio de Login:', error);
-    return throwError(() => new Error('Error en la autenticación.'));
-  }
 }

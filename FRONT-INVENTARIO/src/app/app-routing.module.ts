@@ -1,7 +1,7 @@
 
 import { DashboardComponent } from './pages/admin/home-admin/home-admin.component';
-import { LoginComponent } from './pages/configuracion/login/login.component';
-import { HomeComponent } from './pages/configuracion/home/home.component';
+import { LoginComponent } from './features/config/login/login.component';
+import { HomeComponent } from './features/config/home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PrincipalComponent } from './pages/admin/principal/principal.component';
