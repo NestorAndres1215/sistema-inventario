@@ -3,24 +3,11 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginService } from '../../../core/services/login.service';
 import { ROLES } from 'src/app/core/constants/rol';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertService } from 'src/app/core/services/alert.service';
+import { MENSAJES, TITULO_MESAJES } from 'src/app/core/constants/messages';
+import { LoginData } from 'src/app/core/constants/auth';
 
-
-// Constantes
-const SNACK_DURATION = 3000;
-const MESSAGES = {
-  requiredUsername: 'El nombre de usuario es requerido.',
-  requiredPassword: 'La contraseña es requerida.',
-  invalidCredentials: 'Detalles inválidos. Vuelva a intentar.',
-};
-const ROUTES = {
-  admin: 'admin',
-  user: 'user-dashboard',
-};
-
-interface LoginData {
-  login: string;
-  password: string;
-}
 
 @Component({
   selector: 'app-login',
@@ -28,31 +15,44 @@ interface LoginData {
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  loginData: LoginData = { login: '', password: '' };
+
   hidePassword = true;
+  formulario!: FormGroup;
 
   constructor(
-    private readonly snack: MatSnackBar,
-    private readonly loginService: LoginService,
-    private readonly router: Router
-  ) { }
+    private loginService: LoginService,
+    private alertService: AlertService,
+    private fb: FormBuilder,
+    private router: Router,) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.initForm()
+  }
 
-  formSubmit(): void {
-    const { login, password } = this.loginData;
+  verContraActual = false;
 
-    console.log(this.loginData)
-    if (!login.trim()) {
-      this.showSnack(MESSAGES.requiredUsername);
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
+  }
+  initForm() {
+    this.formulario = this.fb.group({
+      login: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
+
+  operar(): void {
+
+    if (this.formulario.invalid) {
+      this.alertService.advertencia(TITULO_MESAJES.CAMPOS_INCOMPLETOS_TITULO, MENSAJES.CAMPOS_INCOMPLETOS_MENSAJE);
+      this.formulario.markAllAsTouched();
       return;
     }
-
-    if (!password.trim()) {
-      this.showSnack(MESSAGES.requiredPassword);
-      return;
-    }
-    this.loginService.generateToken(this.loginData).subscribe({
+    const login: LoginData = {
+      login: this.formulario.get('login')?.value,
+      password: this.formulario.get('password')?.value,
+    };
+    this.loginService.generateToken(login).subscribe({
       next: (data: any) => {
         this.loginService.loginUser(data.token);
         this.loginService.getCurrentUser().subscribe({
@@ -70,15 +70,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
-
-
   private navigateByRole(role: string): void {
     switch (role) {
       case ROLES.ADMIN:
-        this.router.navigate([ROUTES.admin]);
+        this.router.navigate(['admin']);
         break;
       case ROLES.NORMAL:
-        this.router.navigate([ROUTES.user]);
+        this.router.navigate(['user-dashboard']);
         break;
       default:
         this.loginService.logout();
@@ -88,7 +86,5 @@ export class LoginComponent implements OnInit {
     this.loginService.loginStatusSubjec.next(true);
   }
 
-  private showSnack(message: string): void {
-    this.snack.open(message, 'Aceptar', { duration: SNACK_DURATION });
-  }
+
 }

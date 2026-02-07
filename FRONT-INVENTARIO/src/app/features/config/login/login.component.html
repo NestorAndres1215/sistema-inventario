@@ -1,29 +1,32 @@
-<body>
-  <div class="container">
-    <div class="login-card">
-      <img src="../../../../assets/img/login.jpg" class="login-logo" alt="Login Logo">
-      <h1 class="login-title"><i class="fas fa-lock"></i> Inicio de Sesión</h1>
-      <form (ngSubmit)="formSubmit()">
-        <mat-form-field class="full-width" appearance="outline">
-          <mat-label><i class="fas fa-user"></i> Nombre de usuario</mat-label>
-          <input [(ngModel)]="loginData.login" name="username" required matInput
-            placeholder="Digite su nombre de usuario">
-          <mat-hint>El nombre de usuario debe ser válido</mat-hint>
-        </mat-form-field>
-        <mat-form-field class="full-width" appearance="outline">
-          <mat-label><i class="fas fa-key"></i> Contraseña</mat-label>
-          <input [(ngModel)]="loginData.password" name="password" required [type]="hidePassword ? 'password' : 'text'"
-            matInput placeholder="Digite su contraseña">
-          <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
-            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-          <mat-hint>La contraseña debe ser válida</mat-hint>
-        </mat-form-field>
-
-        <div class="text-center">
-          <button type="submit" class="login-btn"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</button>
-        </div>
-      </form>
+<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center p-3 bg-light">
+  <div class=" shadow-lg rounded-4 p-5 bg-white" style="max-width: 400px; width: 100%;">
+    <div class="text-center mb-3">
+      <i class="fas fa-user-circle"></i>
     </div>
+
+    <h1 class="text-center mb-4 login-title">INICIAR SESIÓN</h1>
+
+    <form [formGroup]="formulario" (ngSubmit)="operar()">
+      <mat-form-field appearance="outline" class="w-100 ">
+        <mat-label>Nombre de usuario</mat-label>
+        <mat-icon matPrefix>person</mat-icon>
+        <input matInput formControlName="login" placeholder="Digite su nombre de usuario" required>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-100 ">
+        <mat-label>Contraseña</mat-label>
+        <mat-icon matPrefix>lock</mat-icon>
+        <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'"
+          placeholder="Digite su contraseña" required>
+        <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()"
+          aria-label="Mostrar u ocultar contraseña">
+          <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <div class="text-center">
+        <app-button label="INICIAR SESION" icon="fas fa-sign-in-alt" color="inicio">
+        </app-button>
+      </div>
+    </form>
   </div>
-</body>
+</div>
