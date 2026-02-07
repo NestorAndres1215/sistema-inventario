@@ -6,7 +6,6 @@ import java.util.Map;
 
 import com.example.backend.service.ReclamoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-
 import com.example.backend.entity.Reclamos;
-
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @RestController
@@ -54,24 +50,16 @@ public class ReclamoController {
 
     @PostMapping("/")
     public ResponseEntity<Reclamos> agregar(@RequestBody Reclamos reclamo) {
-        Reclamos reclamoGuardado = reclamoService.agregarReclamo(reclamo);
-        return ResponseEntity.ok(reclamoGuardado);
+        return ResponseEntity.ok(reclamoService.agregarReclamo(reclamo));
     }
 
     @PostMapping("/activar/{id}")
-    public ResponseEntity<Map<String, String>> activarReclamo(@PathVariable Long id) {
-        boolean activado = reclamoService.activarReclamo(id);
-        Map<String, String> response = new HashMap<>();
-        response.put("mensaje", "Reclamo activado con éxito");
-        return ResponseEntity.ok(response);
-
+    public ResponseEntity<Reclamos> activarReclamo(@PathVariable Long id) {
+        return ResponseEntity.ok(reclamoService.activarReclamo(id));
     }
 
     @PostMapping("/desactivar/{id}")
-    public ResponseEntity<Map<String, String>> desactivarReclamo(@PathVariable Long id) {
-        boolean desactivado = reclamoService.desactivarReclamo(id);
-        Map<String, String> response = new HashMap<>();
-        response.put("mensaje", "Reclamo desactivado con éxito");
-        return ResponseEntity.ok(response);
+    public ResponseEntity<Reclamos> desactivarReclamo(@PathVariable Long id) {
+        return ResponseEntity.ok(reclamoService.desactivarReclamo(id));
     }
 }

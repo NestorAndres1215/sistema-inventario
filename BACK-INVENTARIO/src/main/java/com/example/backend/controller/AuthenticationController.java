@@ -1,19 +1,18 @@
 package com.example.backend.controller;
 
-import com.example.backend.dto.LoginRequestDTO;
-
+import com.example.backend.dto.request.LoginRequest;
+import com.example.backend.dto.response.TokenResponse;
+import com.example.backend.entity.Usuario;
 import com.example.backend.security.UserDetailsServiceImpl;
 import com.example.backend.service.AuthService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-
+import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller
@@ -27,31 +26,14 @@ public class AuthenticationController {
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthService authService;
 
-
-
     @PostMapping("/generate-token")
-    public ResponseEntity<?> generarToken(@RequestBody LoginRequestDTO jwtRequest) throws Exception {
-        try {
-            return ResponseEntity.ok(authService.login(jwtRequest));
-        } catch (Exception e) {
-                e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("ERRRO SOLICITUD");
-        }
+    public ResponseEntity<TokenResponse> generarToken(@Valid @RequestBody LoginRequest request)  {
+        return ResponseEntity.ok(authService.login(request));
     }
-
 
     @GetMapping("/actual-usuario")
-    public ResponseEntity<?> obtenerUsuarioActual(Principal principal) {
-        try {
-            return ResponseEntity.ok(authService.actualUsuario(principal));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("ERROR USUARIO ACTUAL");
-        }
+    public ResponseEntity<Usuario> obtenerUsuarioActual(Principal principal) {
+        return ResponseEntity.ok(authService.actualUsuario(principal));
     }
-
-
-
 
 }

@@ -1,5 +1,7 @@
 package com.example.backend.controller;
 
+import com.example.backend.entity.Reclamos;
+
 import com.example.backend.service.ReclamoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +20,8 @@ public class CorreoController {
     private final ReclamoService reclamoService;
 
     @PostMapping("/reclamo/{id}/enviar-disculpas")
-    public ResponseEntity<String> enviarDisculpas(@PathVariable Long id, @RequestBody String mensaje) {
-        reclamoService.enviarDisculpasReclamo(id, mensaje);
-        return ResponseEntity.ok("Correo de disculpas enviado correctamente");
-
+    public ResponseEntity<Reclamos> enviarDisculpas(@PathVariable Long id, @RequestBody String mensaje) {
+        return ResponseEntity.ok(reclamoService.enviarDisculpasReclamo(id, mensaje));
     }
 
 }

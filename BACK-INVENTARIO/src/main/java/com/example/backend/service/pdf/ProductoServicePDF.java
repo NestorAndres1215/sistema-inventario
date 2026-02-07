@@ -1,15 +1,13 @@
-package com.example.backend.pdf;
+package com.example.backend.service.pdf;
 
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
-import com.example.backend.entity.DetalleSalida;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.backend.repository.Detalle_SalidaRepository;
-
+import com.example.backend.entity.Producto;
+import com.example.backend.repository.ProductoRepository;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -23,14 +21,13 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 @Service
 @RequiredArgsConstructor
-public class SalidasPDF {
+public class ProductoServicePDF {
 
 
-	private  final Detalle_SalidaRepository salidaRepository;
-
+	private final  ProductoRepository productoRepository;
 
     public byte[] generarInformePdf() throws DocumentException {
-		List<DetalleSalida> productosActivos = salidaRepository.findAll();
+		List<Producto> productosActivos = productoRepository.findByEstadoIsTrue();
 
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 		Document document = new Document();
@@ -38,26 +35,20 @@ public class SalidasPDF {
 
 		document.open();
 
-		// Crear un Paragraph para el título con estilo y alineación centrados
 		Font titleFont = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD, BaseColor.BLACK);
-		Paragraph title = new Paragraph("Reporte Salidas Productos", titleFont);
+		Paragraph title = new Paragraph("Informe de Productos Activos", titleFont);
 		title.setAlignment(Element.ALIGN_CENTER);
 		document.add(title);
 
-		// Agregar espacio (párrafo vacío) debajo del título
-		Paragraph emptySpace = new Paragraph(" "); // Puede personalizar el espacio aquí
+		Paragraph emptySpace = new Paragraph(" ");
 		document.add(emptySpace);
 
-		// Crear una tabla
-		PdfPTable table = new PdfPTable(6); // 3 columnas para ID, Nombre y Precio
+		PdfPTable table = new PdfPTable(6);
 		table.setWidthPercentage(100);
 
-		// Configurar el ancho de las columnas (en porcentaje)
-		float[] columnWidths = { 10f, 15f, 10f,10f,10f,10f }; // Por ejemplo, 20% para la columna ID, 40% para Nombre, 20% para
-													// Precio
+		float[] columnWidths = { 10f, 15f, 10f,10f,10f,10f };
 		table.setWidths(columnWidths);
 
-		// Encabezados de la tabla con estilo
 		Font headerFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.WHITE);
 		PdfPCell headerCell;
 
@@ -71,59 +62,56 @@ public class SalidasPDF {
 		headerCell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		table.addCell(headerCell);
 
-		headerCell = new PdfPCell(new Phrase("Cantidad", headerFont));
+		headerCell = new PdfPCell(new Phrase("Precio", headerFont));
 		headerCell.setBackgroundColor(BaseColor.DARK_GRAY);
 		headerCell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		table.addCell(headerCell);
 		
-		headerCell = new PdfPCell(new Phrase("Descripcion", headerFont));
+		headerCell = new PdfPCell(new Phrase("Stock", headerFont));
 		headerCell.setBackgroundColor(BaseColor.DARK_GRAY);
 		headerCell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		table.addCell(headerCell);
 		
-		headerCell = new PdfPCell(new Phrase("Fecha Entrega", headerFont));
+		headerCell = new PdfPCell(new Phrase("Ubicacion", headerFont));
 		headerCell.setBackgroundColor(BaseColor.DARK_GRAY);
 		headerCell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		table.addCell(headerCell);
 		
-		headerCell = new PdfPCell(new Phrase("Usuario", headerFont));
+		headerCell = new PdfPCell(new Phrase("Proveedor", headerFont));
 		headerCell.setBackgroundColor(BaseColor.DARK_GRAY);
 		headerCell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		table.addCell(headerCell);
-		
-		// Agregar datos de productos a la tabla con estilo
+
 		Font cellFont = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL, BaseColor.BLACK);
 		PdfPCell cell;
 
-		for (DetalleSalida producto : productosActivos) {
-			cell = new PdfPCell(new Phrase(String.valueOf(producto.getDetalleSalidaId()), cellFont));
+		for (Producto producto : productosActivos) {
+			cell = new PdfPCell(new Phrase(String.valueOf(producto.getProductoId()), cellFont));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(cell);
 
-			cell = new PdfPCell(new Phrase(producto.getProducto().getNombre(), cellFont));
+			cell = new PdfPCell(new Phrase(producto.getNombre(), cellFont));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(cell);
 
-			cell = new PdfPCell(new Phrase(String.valueOf(producto.getCantidad()), cellFont));
+			cell = new PdfPCell(new Phrase(String.valueOf(producto.getPrecio()), cellFont));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(cell);
 			
-			cell = new PdfPCell(new Phrase(String.valueOf(producto.getDescripcion()), cellFont));
+			cell = new PdfPCell(new Phrase(String.valueOf(producto.getStock()), cellFont));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(cell);
 			
-			cell = new PdfPCell(new Phrase(String.valueOf(producto.getSalida().getFechaSalida()), cellFont));
+			cell = new PdfPCell(new Phrase(String.valueOf(producto.getUbicacion()), cellFont));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(cell);
-			cell = new PdfPCell(new Phrase(String.valueOf(producto.getUsuario().getNombre()), cellFont));
+			cell = new PdfPCell(new Phrase(String.valueOf(producto.getProveedor().getNombre()), cellFont));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(cell);
 
 		}
 
-		// Agregar la tabla al documento
 		document.add(table);
-
 		document.close();
 
 		return byteArrayOutputStream.toByteArray();
