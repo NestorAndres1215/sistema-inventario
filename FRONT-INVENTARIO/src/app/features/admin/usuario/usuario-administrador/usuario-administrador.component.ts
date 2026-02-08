@@ -1,38 +1,49 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
+import { MENSAJES, TITULO_MESAJES } from 'src/app/core/constants/messages';
+import { AlertService } from 'src/app/core/services/alert.service';
 import { ReportesService } from 'src/app/core/services/reportes.service';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
-import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-lista-usuario-administrador-activados',
-  templateUrl: './lista-usuario-administrador-activados.component.html',
-  styleUrls: ['./lista-usuario-administrador-activados.component.css']
+  selector: 'app-usuario-administrador',
+  templateUrl: './usuario-administrador.component.html',
+  styleUrls: ['./usuario-administrador.component.css']
 })
-export class ListaUsuarioAdministradorActivadosComponent implements OnInit {
+export class UsuarioAdministradorComponent implements OnInit {
   usuarioRoles: any = [];
   nombre: string = '';
   usuarioAutenticadoId: number = 1;
-  constructor(private usuarioRolService: UsuarioService, private reporteSalida: ReportesService) { }
-
+  constructor(private router:Router,private usuarioRolService: UsuarioService, private alertService:AlertService,private reporteSalida: ReportesService) { }
+  botonesConfigTable = {
+    ver: true,
+    desactivar: true,
+  };
+  columnas = [
+  { etiqueta: 'Nombre', clave: 'nombre' },
+  { etiqueta: 'Apellido', clave: 'apellido' },
+  { etiqueta: 'Correo', clave: 'email' },
+   { etiqueta: 'Telefono', clave: 'telefono' }
+];
   ngOnInit(): void {
     this.obtenerUsuarioRoles();
   }
 
+  verUsuario(usuarioRol: any) {
+    this.router.navigate(['/admin/usuario', usuarioRol.id]);
+  }
   obtenerUsuarioRoles(): void {
     this.usuarioRolService.obtenerAdminUsuariosActivos()
       .subscribe({
         next: (usuarioRoles: any[]) => {
           this.usuarioRoles = usuarioRoles;
         },
-        error: (error: any) => {
-          console.error('Error al obtener los usuario-roles:', error);
-        }
       });
   }
 
-  pageSize = 3; // Tamaño de página (número de elementos por página)
-  pageIndex = 0; // 
+  pageSize = 3; 
+  pageIndex = 0; 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   onPageChange(event: PageEvent) {
     this.pageIndex = event.pageIndex;
@@ -41,25 +52,13 @@ export class ListaUsuarioAdministradorActivadosComponent implements OnInit {
   desactivarUsuario(usuarioRolId: any): void {
     this.usuarioRolService.desactivarUsuario(usuarioRolId)
       .subscribe({
-        next: (respuesta: any) => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Usuario desactivado',
-            text: respuesta,
-            confirmButtonText: 'Aceptar'
-          });
+        next: () => {
+          this.alertService.advertencia(TITULO_MESAJES.ACTIVADO, MENSAJES.ACTIVADO);
 
           this.obtenerUsuarioRoles(); // Refresca la lista
         },
         error: (error: any) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error al desactivar usuario',
-            text: error?.error || 'Ocurrió un error inesperado.',
-            confirmButtonText: 'Aceptar'
-          });
-
-          console.error('Error al desactivar usuario:', error);
+          this.alertService.error(TITULO_MESAJES.ERROR_TITULO, error.error.message);
         }
       });
   }
@@ -78,5 +77,4 @@ export class ListaUsuarioAdministradorActivadosComponent implements OnInit {
       document.body.removeChild(a);
     });
   }
-
 }

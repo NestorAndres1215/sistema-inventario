@@ -1,0 +1,13 @@
+<table class="table " *ngIf="datos?.length">
+    <thead>
+        <tr>
+            <th colspan="2" style="text-align: center;">{{ titulo }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of datos">
+            <td class="text-center">{{ item.clave }}</td>
+            <td class="text-center">{{ item.valor }}</td>
+        </tr>
+    </tbody>
+</table>

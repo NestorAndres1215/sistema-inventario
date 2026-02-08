@@ -1,0 +1,64 @@
+<div class="container p-4 p-md-5 bg-white rounded-4 shadow-lg">
+  <app-titulo titulo="Registro de Usuario"></app-titulo>
+  <form [formGroup]="form" (ngSubmit)="formSubmit()">
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label><i class="fas fa-id-badge"></i> Nombre</mat-label>
+          <input formControlName="nombre" matInput placeholder="Digite su nombre">
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label><i class="fas fa-id-badge"></i> Apellido</mat-label>
+          <input formControlName="apellido" matInput placeholder="Digite su apellido">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label><i class="fas fa-envelope"></i> Email</mat-label>
+          <input formControlName="email" type="email" matInput placeholder="Digite su email">
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label><i class="fas fa-phone"></i> Teléfono</mat-label>
+          <input formControlName="telefono" type="tel" matInput placeholder="Digite su teléfono" inputmode="numeric"
+            pattern="[0-9]*" title="Ingrese solo números">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label><i class="fas fa-map-marker-alt"></i> Dirección</mat-label>
+          <input formControlName="direccion" matInput placeholder="Digite su dirección">
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label><i class="fas fa-calendar-alt"></i> Fecha de Nacimiento</mat-label>
+          <input formControlName="fechaNacimiento" type="date" matInput>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label><i class="fas fa-hourglass-half"></i> Edad</mat-label>
+          <input formControlName="edad" type="number" matInput placeholder="Digite su edad" min="0">
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label><i class="fas fa-id-card"></i> DNI</mat-label>
+          <input formControlName="dni" type="number" matInput placeholder="Digite su DNI" title="Ingrese solo números">
+        </mat-form-field>
+      </div>
+    </div>
+    <app-button label="Registrar" icon="fas fa-user-plus" color="button">
+    </app-button>
+  </form>
+</div>

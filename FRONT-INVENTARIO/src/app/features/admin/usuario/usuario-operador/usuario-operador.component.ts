@@ -1,23 +1,37 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
+import { MENSAJES, TITULO_MESAJES } from 'src/app/core/constants/messages';
+import { AlertService } from 'src/app/core/services/alert.service';
 import { ReportesService } from 'src/app/core/services/reportes.service';
+
 import { UsuarioService } from 'src/app/core/services/usuario.service';
-import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-lista-usuario-operador-activados',
-  templateUrl: './lista-usuario-operador-activados.component.html',
-  styleUrls: ['./lista-usuario-operador-activados.component.css']
+  selector: 'app-usuario-operador',
+  templateUrl: './usuario-operador.component.html',
+  styleUrls: ['./usuario-operador.component.css']
 })
-export class ListaUsuarioOperadorActivadosComponent implements OnInit {
-
+export class UsuarioOperadorComponent implements OnInit {
   usuarioRoles: any[] = [];
 
-  constructor(private usuarioRolService: UsuarioService,
+  constructor(
+    private usuarioRolService: UsuarioService,
+    private alertService: AlertService,
+    private router: Router,
     private reporteSalida: ReportesService) { }
 
   ngOnInit(): void {
     this.obtenerUsuarioRoles();
+  }
+  
+  botonesConfigTable = {
+    ver: true,
+    desactivar: true,
+  };
+
+  verUsuario(usuarioRol: any) {
+    this.router.navigate(['/admin/usuario', usuarioRol.id]);
   }
 
   obtenerUsuarioRoles(): void {
@@ -26,41 +40,33 @@ export class ListaUsuarioOperadorActivadosComponent implements OnInit {
         next: (usuarioRoles: any[]) => {
           this.usuarioRoles = usuarioRoles;
         },
-        error: (error: any) => {
-          console.error('Error al obtener los usuario-roles:', error);
-        }
       });
   }
 
-  pageSize = 3; // Tamaño de página (número de elementos por página)
-  pageIndex = 0; // 
+  columnas = [
+    { etiqueta: 'Nombre', clave: 'nombre' },
+    { etiqueta: 'Apellido', clave: 'apellido' },
+    { etiqueta: 'Correo', clave: 'email' },
+    { etiqueta: 'Telefono', clave: 'telefono' }
+  ];
+
+  pageSize = 3;
+  pageIndex = 0;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   onPageChange(event: PageEvent) {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
   }
+
   desactivarUsuario(usuarioRolId: any): void {
     this.usuarioRolService.desactivarUsuario(usuarioRolId)
       .subscribe({
-        next: (respuesta: any) => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Usuario desactivado',
-            text: respuesta,
-            confirmButtonText: 'Aceptar'
-          });
-
-          this.obtenerUsuarioRoles(); // Refrescar la tabla
+        next: () => {
+          this.alertService.advertencia(TITULO_MESAJES.ACTIVADO, MENSAJES.ACTIVADO);
+          this.obtenerUsuarioRoles();
         },
         error: (error: any) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error al desactivar usuario',
-            text: error?.error || 'Ocurrió un error inesperado',
-            confirmButtonText: 'Aceptar'
-          });
-
-          console.error('Error al desactivar usuario:', error);
+          this.alertService.error(TITULO_MESAJES.ERROR_TITULO, error.error.message);
         }
       });
   }
@@ -79,5 +85,4 @@ export class ListaUsuarioOperadorActivadosComponent implements OnInit {
       document.body.removeChild(a);
     });
   }
-
 }

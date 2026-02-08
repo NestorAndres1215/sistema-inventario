@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="mt-4">
+    <app-titulo titulo="Usuarios Operador"></app-titulo>
+  </div>
+  <div class="row g-3">
+    <div class="col-12 col-md-4">
+      <app-button [routerLink]="'/admin/usuario/registrar-usuario-operador'" label="Registrar" icon="fas fa-user-plus"
+        color="button">
+      </app-button>
+    </div>
+    <div class="col-12 col-md-4">
+      <app-button [routerLink]="'/admin/usuario/registrar-usuario-operador'" label="Desactivados"
+        icon="fas fa-user-slash" color="button">
+      </app-button>
+    </div>
+    <div class="col-12 col-md-4">
+      <app-button label="Reporte" icon="fas fa-file-pdf" color="button" (click)="descargarPDF()">
+      </app-button>
+    </div>
+  </div>
+  <app-tabla [columnas]="columnas" [datos]="usuarioRoles" [botonesConfig]="botonesConfigTable"
+    [onVer]="verUsuario.bind(this)" [onDesactivar]="desactivarUsuario.bind(this)">
+  </app-tabla>
+  <mat-paginator [length]="usuarioRoles.length" [pageSize]="pageSize" [pageIndex]="pageIndex" class="letra"
+    (page)="onPageChange($event)" #paginator></mat-paginator>
+</div>

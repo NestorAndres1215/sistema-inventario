@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/core/models/usuario';
+import { MENSAJES, TITULO_MESAJES } from 'src/app/core/constants/messages';
+import { AlertService } from 'src/app/core/services/alert.service';
 @Component({
   selector: 'app-registrar-usuario-administrador',
   templateUrl: './registrar-usuario-administrador.component.html',
@@ -13,10 +13,11 @@ import { Usuario } from 'src/app/core/models/usuario';
 export class RegistrarUsuarioAdministradorComponent implements OnInit {
   form!: FormGroup;
   constructor(
+    private alertService: AlertService,
     private fb: FormBuilder,
     private router: Router,
     private userService: UsuarioService,
-    private snack: MatSnackBar
+  
   ) { }
 
   ngOnInit(): void {
@@ -36,18 +37,15 @@ export class RegistrarUsuarioAdministradorComponent implements OnInit {
 
 
   formSubmit() {
-    if (this.form.invalid) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Faltan datos',
-        text: 'Por favor, ingrese todos los campos requeridos correctamente.'
-      });
+
+    if (!this.form.valid) {
+      this.alertService.advertencia(TITULO_MESAJES.CAMPOS_INCOMPLETOS_TITULO, MENSAJES.CAMPOS_INCOMPLETOS_MENSAJE);
+      this.form.markAllAsTouched();
       return;
     }
-
     const user: Usuario = {
-      username: 'O' + this.form.value.dni, // Generado automáticamente
-      password: this.form.value.dni + 'O', // Generado automáticamente
+      username: 'O' + this.form.value.dni,
+      password: this.form.value.dni + 'O',
       nombre: this.form.value.nombre,
       apellido: this.form.value.apellido,
       email: this.form.value.email,
@@ -57,35 +55,16 @@ export class RegistrarUsuarioAdministradorComponent implements OnInit {
       fechaNacimiento: this.form.value.fechaNacimiento,
       edad: this.form.value.edad
     };
+    
     this.userService.registrarAdmin(user).subscribe({
-      next: (data) => {
-        Swal.fire('Usuario guardado', 'Usuario registrado con éxito en el sistema', 'success');
+      next: () => {
+        this.alertService.aceptacion(TITULO_MESAJES.REGISTRO_EXITOSO_TITULO, MENSAJES.REGISTRO_EXITOSO_MENSAJE);
         this.router.navigate(['/admin/usuario']);
       },
-      error: (err) => {
-        console.error(err);
-        this.snack.open('Ha ocurrido un error en el sistema', 'Aceptar', { duration: 3000 });
+      error: (error) => {
+        this.alertService.error(TITULO_MESAJES.ERROR_TITULO, error.error.message);
       },
-      complete: () => {
-        console.log('Solicitud completada');
-      }
     });
-
   }
-  limitarLongitud1(event: any) {
-    const input = event.target;
-    const maxLength = 8; // Máxima longitud permitida
 
-    if (input.value.length > maxLength) {
-      input.value = input.value.slice(0, maxLength); // Limita la longitud
-    }
-  }
-  limitarLongitudTelefono(event: any) {
-    const input = event.target;
-    const maxLength = 9; // Máxima longitud permitida
-
-    if (input.value.length > maxLength) {
-      input.value = input.value.slice(0, maxLength); // Limita la longitud
-    }
-  }
 }

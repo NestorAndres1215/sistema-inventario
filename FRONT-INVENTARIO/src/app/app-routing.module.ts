@@ -8,7 +8,7 @@ import { PrincipalComponent } from './features/admin/principal/principal.compone
 import { PerfilComponent } from './pages/admin/perfil/perfil.component';
 import { ProveedorComponent } from './pages/admin/proveedor/proveedor.component';
 import { ProductosComponent } from './pages/admin/productos/productos.component';
-import { UsuarioComponent } from './pages/admin/usuario/usuario.component';
+import { UsuarioComponent } from './features/admin/usuario/usuario.component';
 import { ConfiguracionComponent } from './features/admin/configuracion/configuracion.component';
 
 
@@ -18,9 +18,9 @@ import { ActualizarProductoComponent } from './pages/admin/productos/actualizar-
 import { CrearProveedorComponent } from './pages/admin/proveedor/crear-proveedor/crear-proveedor.component';
 import { ActualizarProveedorComponent } from './pages/admin/proveedor/actualizar-proveedor/actualizar-proveedor.component';
 import { HomeUsuarioComponent } from './pages/usuario/home-usuario/home-usuario.component';
-import { RegistrarUsuarioAdministradorComponent } from './pages/admin/usuario/usuario-administrador/registrar-usuario-administrador/registrar-usuario-administrador.component';
-import { RegistrarUsuarioOperadorComponent } from './pages/admin/usuario/usuario-operador/registrar-usuario-operador/registrar-usuario-operador.component';
-import { DetalleUsuarioComponent } from './pages/admin/usuario/detalle-usuario/detalle-usuario.component';
+import { RegistrarUsuarioAdministradorComponent } from './features/admin/usuario/usuario-administrador/registrar-usuario-administrador/registrar-usuario-administrador.component';
+import { RegistrarUsuarioOperadorComponent } from './features/admin/usuario/usuario-operador/registrar-usuario-operador/registrar-usuario-operador.component';
+import { DetalleUsuarioComponent } from './features/admin/usuario/detalle-usuario/detalle-usuario.component';
 import { DetalleProveedorComponent } from './pages/admin/proveedor/detalle-proveedor/detalle-proveedor.component';
 import { DetalleProductoComponent } from './pages/admin/productos/detalle-producto/detalle-producto.component';
 
@@ -38,7 +38,7 @@ import { DetalleSalidasComponent } from './pages/admin/salidas/detalle-salidas/d
 
 import { EntradaUsuarioComponent } from './pages/usuario/entrada-usuario/entrada-usuario.component';
 import { SalidaUsuarioComponent } from './pages/usuario/salida-usuario/salida-usuario.component';
-import { ActualizarUsuarioComponent } from './pages/admin/usuario/actualizar-usuario/actualizar-usuario.component';
+import { ActualizarUsuarioComponent } from './features/admin/usuario/actualizar-usuario/actualizar-usuario.component';
 import { ResponderCorreoComponent } from './pages/admin/reclamos/responder-correo/responder-correo.component';
 import { ActualizarUsuarioUsuarioComponent } from './pages/usuario/actualizar-usuario-usuario/actualizar-usuario-usuario.component';
 import { DetalleEntradaUsuarioComponent } from './pages/usuario/entrada-usuario/detalle-entrada-usuario/detalle-entrada-usuario.component';

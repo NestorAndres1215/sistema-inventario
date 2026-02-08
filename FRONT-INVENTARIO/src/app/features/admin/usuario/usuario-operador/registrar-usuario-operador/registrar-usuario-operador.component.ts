@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/core/models/usuario';
+import { AlertService } from 'src/app/core/services/alert.service';
+import { MENSAJES, TITULO_MESAJES } from 'src/app/core/constants/messages';
 
 @Component({
   selector: 'app-registrar-usuario-operador',
@@ -17,9 +19,9 @@ export class RegistrarUsuarioOperadorComponent implements OnInit {
   form!: FormGroup;
   constructor(
     private fb: FormBuilder,
+    private alertService: AlertService,
     private router: Router,
     private userService: UsuarioService,
-    private snack: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -39,18 +41,15 @@ export class RegistrarUsuarioOperadorComponent implements OnInit {
 
 
   formSubmit() {
-    if (this.form.invalid) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Faltan datos',
-        text: 'Por favor, ingrese todos los campos requeridos correctamente.'
-      });
+    if (!this.form.valid) {
+      this.alertService.advertencia(TITULO_MESAJES.CAMPOS_INCOMPLETOS_TITULO, MENSAJES.CAMPOS_INCOMPLETOS_MENSAJE);
+      this.form.markAllAsTouched();
       return;
     }
 
     const user: Usuario = {
-      username: 'O' + this.form.value.dni, // Generado automáticamente
-      password: this.form.value.dni + 'O', // Generado automáticamente
+      username: 'O' + this.form.value.dni,
+      password: this.form.value.dni + 'O',
       nombre: this.form.value.nombre,
       apellido: this.form.value.apellido,
       email: this.form.value.email,
@@ -61,34 +60,15 @@ export class RegistrarUsuarioOperadorComponent implements OnInit {
       edad: this.form.value.edad
     };
     this.userService.registrarNormal(user).subscribe({
-      next: (data) => {
-        Swal.fire('Usuario guardado', 'Usuario registrado con éxito en el sistema', 'success');
+      next: () => {
+        this.alertService.aceptacion(TITULO_MESAJES.REGISTRO_EXITOSO_TITULO, MENSAJES.REGISTRO_EXITOSO_MENSAJE);
         this.router.navigate(['/admin/usuario']);
       },
-      error: (err) => {
-        console.error(err);
-        this.snack.open('Ha ocurrido un error en el sistema', 'Aceptar', { duration: 3000 });
+      error: (error) => {
+        this.alertService.error(TITULO_MESAJES.ERROR_TITULO, error.error.message);
       },
-      complete: () => {
-        console.log('Solicitud completada');
-      }
     });
 
   }
-  limitarLongitud1(event: any) {
-    const input = event.target;
-    const maxLength = 8; // Máxima longitud permitida
 
-    if (input.value.length > maxLength) {
-      input.value = input.value.slice(0, maxLength); // Limita la longitud
-    }
-  }
-  limitarLongitudTelefono(event: any) {
-    const input = event.target;
-    const maxLength = 9; // Máxima longitud permitida
-
-    if (input.value.length > maxLength) {
-      input.value = input.value.slice(0, maxLength); // Limita la longitud
-    }
-  }
 }
