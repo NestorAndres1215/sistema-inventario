@@ -5,7 +5,7 @@ import { HomeComponent } from './features/config/home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PrincipalComponent } from './features/admin/principal/principal.component';
-import { PerfilComponent } from './pages/admin/perfil/perfil.component';
+import { PerfilComponent } from './features/admin/perfil/perfil.component';
 import { ProveedorComponent } from './pages/admin/proveedor/proveedor.component';
 import { ProductosComponent } from './pages/admin/productos/productos.component';
 

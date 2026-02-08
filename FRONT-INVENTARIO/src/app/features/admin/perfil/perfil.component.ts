@@ -15,14 +15,12 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.loginService.getUser();
-
     if (this.user) {
       this.cargarDatosUsuario();
       this.ordenarDatosUsuario();
     }
   }
 
-  // 🔹 Arma los datos
   private cargarDatosUsuario(): void {
     this.datosUsuario = [
       { clave: 'Nombre de usuario', valor: this.user.username },

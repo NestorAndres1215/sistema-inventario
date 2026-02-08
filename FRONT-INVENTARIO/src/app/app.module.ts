@@ -31,7 +31,7 @@ import { DashboardComponent } from './features/admin/home-admin/home-admin.compo
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NavbarAdminComponent } from './shared/navbar-admin/navbar-admin.component';
 import { PrincipalComponent } from './features/admin/principal/principal.component';
-import { PerfilComponent } from './pages/admin/perfil/perfil.component';
+import { PerfilComponent } from './features/admin/perfil/perfil.component';
 import { ProductosComponent } from './pages/admin/productos/productos.component';
 import { ProveedorComponent } from './pages/admin/proveedor/proveedor.component';
 import { ConfiguracionComponent } from './features/admin/configuracion/configuracion.component';

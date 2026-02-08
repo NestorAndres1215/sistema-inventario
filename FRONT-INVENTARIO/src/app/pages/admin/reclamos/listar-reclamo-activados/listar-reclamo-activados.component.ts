@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ReclamoService } from 'src/app/core/services/reclamo.service';
 import Swal from 'sweetalert2';
 
@@ -10,27 +11,58 @@ import Swal from 'sweetalert2';
 export class ListarReclamoActivadosComponent implements OnInit {
 
   reclamos: any[] = [];
-  cargando: boolean = false;
+  reclamosTabla: any[] = [];
+  cargando = false;
 
-  constructor(private reclamoService: ReclamoService) { }
+columnas = [
+  { etiqueta: 'Código', clave: 'id' },
+  { etiqueta: 'Nombre', clave: 'nombre' },
+  { etiqueta: 'Correo', clave: 'correo' },
+  { etiqueta: 'Asunto', clave: 'asunto' },
+  { etiqueta: 'Estado', clave: 'estado' }
+];
+
+
+
+  botonesConfigTable = {
+    ver: true,
+    textoVer: 'Responder',
+    iconoVer: 'fas fa-reply'
+  };
+
+  constructor(
+    private reclamoService: ReclamoService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.obtenerReclamosActivos();
   }
 
-  obtenerReclamosActivos() {
+  obtenerReclamosActivos(): void {
     this.cargando = true;
-
     this.reclamoService.listarReclamosActivos().subscribe({
       next: (data: any[]) => {
         this.reclamos = data;
+        this.mapearReclamosTabla();
         this.cargando = false;
       },
-      error: (error) => {
-        console.error("Error al obtener los reclamos activos:", error);
-        this.cargando = false;
-        Swal.fire("Error", "No se pudieron cargar los reclamos activos", "error");
-      }
     });
+  }
+
+  private mapearReclamosTabla(): void {
+    this.reclamosTabla = this.reclamos.map(r => ({
+      id: r.reclamoId,
+      nombre: r.usuario?.nombre,
+      correo: r.usuario?.email,
+      asunto: r.asunto,
+      estado: r.estado ? 'Recibido' : 'Enviado'
+    }));
+  }
+
+  verReclamo(item: any): void {
+    this.router.navigate(
+      ['/admin/configuracion/reclamos', item.id]
+    );
   }
 }

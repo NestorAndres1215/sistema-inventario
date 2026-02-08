@@ -1,32 +1,5 @@
-<body>
-  <div class="container">
-    <h2><i class="fas fa-times-circle"></i> Lista de Desactivadas</h2>
-    <hr>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th><i class="fas fa-hashtag"></i> Código</th>
-          <th><i class="fas fa-user"></i> Nombre</th>
-          <th><i class="fas fa-envelope"></i> Correo</th>
-          <th><i class="fas fa-file-alt"></i> Asunto</th>
-          <th><i class="fas fa-info-circle"></i> Estado</th>
-          <th><i class="fas fa-cogs"></i> Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let reclamo of reclamos">
-          <td>{{ reclamo.reclamoId }}</td>
-          <td>{{ reclamo.usuario.nombre }}</td>
-          <td>{{ reclamo.usuario.email }}</td>
-          <td>{{ reclamo.asunto }}</td>
-          <td>{{ reclamo.estado ? "Recibido" : "Enviado" }}</td>
-          <td>
-            <button [routerLink]="'/admin/configuracion/reclamos/' + reclamo.reclamoId" class="btn-reactivar">
-              <i class="fas fa-undo"></i> Reactivar
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</body>
+<div class="container mt-4">
+  <app-tabla [columnas]="columnas" [datos]="reclamos" [botonesConfig]="botonesConfigTable"
+    [onActivar]="verReclamo.bind(this)">
+  </app-tabla>
+</div>

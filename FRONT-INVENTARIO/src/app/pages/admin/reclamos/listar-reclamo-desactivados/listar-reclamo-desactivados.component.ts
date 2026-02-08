@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ReclamoService } from 'src/app/core/services/reclamo.service';
 import Swal from 'sweetalert2';
 
@@ -12,7 +13,19 @@ export class ListarReclamoDesactivadosComponent implements OnInit {
   reclamos: any[] = [];
   cargando: boolean = false;
 
-  constructor(private reclamoService: ReclamoService) { }
+  constructor(private reclamoService: ReclamoService, private router: Router) { }
+  columnas = [
+    { clave: 'reclamoId', etiqueta: 'Código' },
+    { clave: 'nombre', etiqueta: 'Nombre' },
+    { clave: 'correo', etiqueta: 'Correo' },
+    { clave: 'asunto', etiqueta: 'Asunto' },
+    { clave: 'estado', etiqueta: 'Estado' }
+  ];
+
+  botonesConfigTable = {
+    activar: true,
+    textoActivar: 'Reactivar'
+  };
 
   ngOnInit(): void {
     this.obtenerReclamosDesactivados();
@@ -20,18 +33,18 @@ export class ListarReclamoDesactivadosComponent implements OnInit {
 
   obtenerReclamosDesactivados() {
     this.cargando = true;
-
     this.reclamoService.listarReclamosDesactivados().subscribe({
       next: (data: any[]) => {
         this.reclamos = data;
         this.cargando = false;
       },
-      error: (error) => {
-        console.error("Error al obtener los reclamos:", error);
-        this.cargando = false;
-        Swal.fire("Error", "No se pudieron cargar los reclamos desactivados", "error");
-      }
     });
+  }
+
+  verReclamo(item: any): void {
+    this.router.navigate(
+      ['/admin/configuracion/reclamos', item.id]
+    );
   }
 
 }
