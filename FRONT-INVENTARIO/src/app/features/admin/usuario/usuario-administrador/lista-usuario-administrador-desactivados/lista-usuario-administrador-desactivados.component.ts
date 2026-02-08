@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MENSAJES, TITULO_MESAJES } from 'src/app/core/constants/messages';
+import { AlertService } from 'src/app/core/services/alert.service';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
 import Swal from 'sweetalert2';
 
@@ -11,9 +13,20 @@ import Swal from 'sweetalert2';
 })
 export class ListaUsuarioAdministradorDesactivadosComponent implements OnInit {
 
-  usuarioRoles: any[] = [];
+  botonesConfigTable = {
+    ver: true,
+    desactivar: true,
+  };
 
-  constructor(private usuarioRolService: UsuarioService) { }
+  usuarioRoles: any[] = [];
+  
+  columnas = [
+    { etiqueta: 'Nombre', clave: 'nombre' },
+    { etiqueta: 'Apellido', clave: 'apellido' },
+    { etiqueta: 'Correo', clave: 'email' },
+    { etiqueta: 'Telefono', clave: 'telefono' }
+  ];
+  constructor(private usuarioRolService: UsuarioService, private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.obtenerUsuarioRoles();
@@ -25,15 +38,11 @@ export class ListaUsuarioAdministradorDesactivadosComponent implements OnInit {
         next: (usuarioRoles: any[]) => {
           this.usuarioRoles = usuarioRoles;
         },
-        error: (error: any) => {
-          console.error('Error al obtener los usuario-roles:', error);
-        }
       });
   }
 
   pageIndex = 0;
-
-  pageSize = 3; // Tamaño de página (número de elementos por página)
+  pageSize = 3;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   onPageChange(event: PageEvent) {
@@ -44,25 +53,13 @@ export class ListaUsuarioAdministradorDesactivadosComponent implements OnInit {
   activarUsuario(usuarioRolId: any): void {
     this.usuarioRolService.activarUsuario(usuarioRolId)
       .subscribe({
-        next: (respuesta: any) => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Usuario activado',
-            text: respuesta,
-            confirmButtonText: 'Aceptar'
-          });
+        next: () => {
+          this.alertService.advertencia(TITULO_MESAJES.ACTIVADO, MENSAJES.ACTIVADO);
 
-          this.obtenerUsuarioRoles(); // Actualiza tabla
+          this.obtenerUsuarioRoles();
         },
-        error: (error: any) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error al activar usuario',
-            text: error?.error || 'Ocurrió un error inesperado.',
-            confirmButtonText: 'Aceptar'
-          });
-
-          console.error('Error al activar usuario:', error);
+        error: (error) => {
+          this.alertService.error(TITULO_MESAJES.ERROR_TITULO, error.error.message);
         }
       });
   }

@@ -17,7 +17,18 @@ export class ListaUsuarioOperadorDesactivadosComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerUsuarioRoles();
   }
+  botonesConfigTable = {
+    ver: true,
+    desactivar: true,
+  };
 
+
+  columnas = [
+    { etiqueta: 'Nombre', clave: 'nombre' },
+    { etiqueta: 'Apellido', clave: 'apellido' },
+    { etiqueta: 'Correo', clave: 'email' },
+    { etiqueta: 'Telefono', clave: 'telefono' }
+  ];
   obtenerUsuarioRoles(): void {
     this.usuarioRolService.obtenerUsuariosNormalesDesactivados()
       .subscribe({

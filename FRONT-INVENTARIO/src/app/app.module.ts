@@ -25,24 +25,18 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatPaginatorModule } from '@angular/material/paginator';
-//importacion del component
-
 import { LoginComponent } from './features/config/login/login.component';
 import { HomeComponent } from './features/config/home/home.component';
-
 import { DashboardComponent } from './features/admin/home-admin/home-admin.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NavbarAdminComponent } from './shared/navbar-admin/navbar-admin.component';
 import { PrincipalComponent } from './features/admin/principal/principal.component';
 import { PerfilComponent } from './pages/admin/perfil/perfil.component';
 import { ProductosComponent } from './pages/admin/productos/productos.component';
-import { UsuarioComponent } from './features/admin/usuario/usuario.component';
 import { ProveedorComponent } from './pages/admin/proveedor/proveedor.component';
-
 import { ConfiguracionComponent } from './features/admin/configuracion/configuracion.component';
 import { CrearProductoComponent } from './pages/admin/productos/crear-producto/crear-producto.component';
 import { ActualizarProductoComponent } from './pages/admin/productos/actualizar-producto/actualizar-producto.component';
-
 import { ListarActivadasProveedorComponent } from './pages/admin/proveedor/listar-activadas-proveedor/listar-activadas-proveedor.component';
 import { ListarDesactivarProveedorComponent } from './pages/admin/proveedor/listar-desactivar-proveedor/listar-desactivar-proveedor.component';
 import { CrearProveedorComponent } from './pages/admin/proveedor/crear-proveedor/crear-proveedor.component';
@@ -58,9 +52,9 @@ import { UsuarioOperadorComponent } from './features/admin/usuario/usuario-opera
 import { InventarioUsuarioComponent } from './pages/usuario/inventario-usuario/inventario-usuario.component';
 import { PrincipalUsuarioComponent } from './pages/usuario/principal-usuario/principal-usuario.component';
 import { ConfiguracionUsuarioComponent } from './pages/usuario/configuracion-usuario/configuracion-usuario.component';
-import { ListaUsuarioAdministradorDesactivadosComponent } from './pages/admin/usuario/usuario-administrador/lista-usuario-administrador-desactivados/lista-usuario-administrador-desactivados.component';
+import { ListaUsuarioAdministradorDesactivadosComponent } from './features/admin/usuario/usuario-administrador/lista-usuario-administrador-desactivados/lista-usuario-administrador-desactivados.component';
 import { RegistrarUsuarioAdministradorComponent } from './features/admin/usuario/usuario-administrador/registrar-usuario-administrador/registrar-usuario-administrador.component';
-import { ListaUsuarioOperadorDesactivadosComponent } from './pages/admin/usuario/usuario-operador/lista-usuario-operador-desactivados/lista-usuario-operador-desactivados.component';
+import { ListaUsuarioOperadorDesactivadosComponent } from './features/admin/usuario/usuario-operador/lista-usuario-operador-desactivados/lista-usuario-operador-desactivados.component';
 import { RegistrarUsuarioOperadorComponent } from './features/admin/usuario/usuario-operador/registrar-usuario-operador/registrar-usuario-operador.component';
 import { DetalleUsuarioComponent } from './features/admin/usuario/detalle-usuario/detalle-usuario.component';
 import { DetalleProveedorComponent } from './pages/admin/proveedor/detalle-proveedor/detalle-proveedor.component';
@@ -113,9 +107,7 @@ import { TablaComponent } from './shared/tabla/tabla.component';
     PrincipalComponent,
     PerfilComponent,
     ProductosComponent,
-    UsuarioComponent,
     ProveedorComponent,
-
     ConfiguracionComponent,
     CrearProductoComponent,
     ActualizarProductoComponent,

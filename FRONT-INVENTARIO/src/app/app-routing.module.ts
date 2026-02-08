@@ -8,7 +8,7 @@ import { PrincipalComponent } from './features/admin/principal/principal.compone
 import { PerfilComponent } from './pages/admin/perfil/perfil.component';
 import { ProveedorComponent } from './pages/admin/proveedor/proveedor.component';
 import { ProductosComponent } from './pages/admin/productos/productos.component';
-import { UsuarioComponent } from './features/admin/usuario/usuario.component';
+
 import { ConfiguracionComponent } from './features/admin/configuracion/configuracion.component';
 
 
@@ -48,6 +48,10 @@ import { RegistarSalidaUsuarioComponent } from './pages/usuario/salida-usuario/r
 import { RegistrarEntradaUsuarioComponent } from './pages/usuario/entrada-usuario/registrar-entrada-usuario/registrar-entrada-usuario.component';
 import { AdminGuard } from './core/guards/admin.guard';
 import { NormalGuard } from './core/guards/normal.guard';
+import { ListaUsuarioAdministradorDesactivadosComponent } from './features/admin/usuario/usuario-administrador/lista-usuario-administrador-desactivados/lista-usuario-administrador-desactivados.component';
+import { UsuarioAdministradorComponent } from './features/admin/usuario/usuario-administrador/usuario-administrador.component';
+import { UsuarioOperadorComponent } from './features/admin/usuario/usuario-operador/usuario-operador.component';
+import { ListaUsuarioOperadorDesactivadosComponent } from './features/admin/usuario/usuario-operador/lista-usuario-operador-desactivados/lista-usuario-operador-desactivados.component';
 
 const routes: Routes = [
   {
@@ -138,8 +142,12 @@ const routes: Routes = [
         component: DetalleProductoComponent,
       },
       {
-        path: 'usuario',
-        component: UsuarioComponent,
+        path: 'usuario/operador',
+        component: UsuarioOperadorComponent,
+      },
+      {
+        path: 'usuario/administrador',
+        component: UsuarioAdministradorComponent,
       },
       {
         path: 'usuario/registrar-usuario-administrador',
@@ -148,17 +156,24 @@ const routes: Routes = [
       {
         path: 'usuario/registrar-usuario-operador',
         component: RegistrarUsuarioOperadorComponent,
+      }, {
+        path: 'usuario/usuarios-admin-desactivados',
+        component: ListaUsuarioAdministradorDesactivadosComponent,
+      },
+      {
+        path: 'usuario/usuarios-operador-desactivados',
+        component: ListaUsuarioOperadorDesactivadosComponent,
       },
       {
         path: 'usuario/:id',
         component: DetalleUsuarioComponent,
       },
 
-   
+
       {
         path: 'configuracion',
         component: ConfiguracionComponent
-      },   {
+      }, {
         path: 'configuracion/reclamos/:reclamoId',
         component: ResponderCorreoComponent,
       },
@@ -203,7 +218,7 @@ const routes: Routes = [
       {
         path: 'entradas-usuario',
         component: EntradaUsuarioComponent,
-      }, 
+      },
       {
         path: 'entradas-usuario/registrar-entradas',
         component: RegistrarEntradaUsuarioComponent,
@@ -216,7 +231,7 @@ const routes: Routes = [
         path: 'salidas-usuario/registrar-salidas',
         component: RegistarSalidaUsuarioComponent,
       },
-   
+
 
       {
         path: 'configuracion',
