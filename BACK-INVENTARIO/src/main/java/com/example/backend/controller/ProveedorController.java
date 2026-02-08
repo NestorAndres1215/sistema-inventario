@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.example.backend.dto.ProveedorDTO;
+import com.example.backend.dto.request.ProveedorRequest;
 import com.example.backend.service.ProveedorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,73 +22,68 @@ import com.example.backend.repository.ProveedorRepository;
 @RequiredArgsConstructor
 public class ProveedorController {
 
-
-    private final ProveedorRepository proveedorRepository;
     private final ProveedorService proveedorService;
 
-    // Metodo Listar
+    @GetMapping("/ruc/{ruc}")
+    public List<Proveedor> listarPorRuc(@PathVariable String ruc) {
+        return proveedorService.listarPorRuc(ruc);
+    }
+
+    @GetMapping("/telefono/{telefono}")
+    public List<Proveedor> listarPorTelefono(@PathVariable String telefono) {
+        return proveedorService.listarPorTelefono(telefono);
+    }
+
+    @GetMapping("/email/{email}")
+    public List<Proveedor> listarPorEmail(@PathVariable String email) {
+        return proveedorService.listarPorEmail(email);
+    }
+
+    @GetMapping("/nombre/{nombre}")
+    public List<Proveedor> listarPorNombre(@PathVariable String nombre) {
+        return proveedorService.listarPorNombre(nombre);
+    }
+
     @GetMapping
     public List<Proveedor> obtenerProveedor() {
         return proveedorService.listarTodos();
     }
 
-    // Metodo Listar por Id
     @GetMapping("/{id}")
-    public ResponseEntity<Proveedor> obtenerProveedorPorId(@PathVariable Long id) {
-        return proveedorService.obtenerPorId(id)
-                .map(proveedor -> ResponseEntity.ok(proveedor))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public Proveedor obtenerProveedorPorId(@PathVariable Long id) {
+        return proveedorService.obtenerPorId(id);
     }
 
 
-    // Metodo Listar desactivadas
     @GetMapping("/desactivadas")
     public List<Proveedor> obtenerProveedorDesactivadas() {
         return proveedorService.findByEstadoIsFalse();
     }
 
-    // Metodo Listar activadas
+
     @GetMapping("/activadas")
     public List<Proveedor> obtenerProveedorActivadas() {
         return proveedorService.findByEstadoIsTrue();
     }
 
-    // crear proveedor
     @PostMapping("/")
-    public ResponseEntity<?> agregarProveedor(@RequestBody ProveedorDTO proveedorDTO) {
-        Proveedor creado = proveedorService.crearProveedor(proveedorDTO);
-        return ResponseEntity.ok(creado);
+    public ResponseEntity<?> agregarProveedor(@RequestBody ProveedorRequest proveedorDTO) {
+        return ResponseEntity.ok(proveedorService.crearProveedor(proveedorDTO));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Proveedor> actualizarProveedor(@RequestBody ProveedorDTO proveedorDTO) {
-        Proveedor actualizado = proveedorService.actualizarProveedor(proveedorDTO);
-        return ResponseEntity.ok(actualizado);
+    public ResponseEntity<Proveedor> actualizarProveedor(@RequestBody ProveedorRequest proveedorDTO) {
+        return ResponseEntity.ok(proveedorService.actualizarProveedor(proveedorDTO));
     }
 
     @PostMapping("/activar/{id}")
-    public ResponseEntity<Map<String, String>> activarProveedor(@PathVariable Long id) {
-        boolean activado = proveedorService.activarProveedor(id);
-        Map<String, String> response = new HashMap<>();
-        if (activado) {
-            response.put("mensaje", "Proveedor activado con éxito");
-            return ResponseEntity.ok(response);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Proveedor> activarProveedor(@PathVariable Long id) {
+        return ResponseEntity.ok(proveedorService.activarProveedor(id));
     }
 
     @PostMapping("/desactivar/{id}")
-    public ResponseEntity<Map<String, String>> desactivarProveedor(@PathVariable Long id) {
-        boolean desactivado = proveedorService.desactivarProveedor(id);
-        Map<String, String> response = new HashMap<>();
-        if (desactivado) {
-            response.put("mensaje", "Proveedor desactivado con éxito");
-            return ResponseEntity.ok(response);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Proveedor> desactivarProveedor(@PathVariable Long id) {
+        return ResponseEntity.ok(proveedorService.desactivarProveedor(id));
     }
-
 
 }

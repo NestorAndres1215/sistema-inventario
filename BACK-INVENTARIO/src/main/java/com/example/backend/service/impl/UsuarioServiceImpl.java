@@ -58,9 +58,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario actualizarUsuario(Long id, UsuarioRequest dto) {
 
         Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(NotFoundMessages.USUARIO_NO_ENCONTRADO)
-                );
+                .orElseThrow(() -> new ResourceNotFoundException(NotFoundMessages.USUARIO_NO_ENCONTRADO));
 
         validarCamposUnicosAlActualizar(usuario, dto);
 
@@ -80,9 +78,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         if (dto.getRol() != null) {
             Rol rol = rolRepository.findByNombre(dto.getRol())
-                    .orElseThrow(() ->
-                            new ResourceNotFoundException(NotFoundMessages.ROL_NO_ENCONTRADO)
-                    );
+                    .orElseThrow(() -> new ResourceNotFoundException(NotFoundMessages.ROL_NO_ENCONTRADO));
             usuario.setRol(rol);
         }
 
