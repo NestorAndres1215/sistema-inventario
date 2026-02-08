@@ -1,2 +1,22 @@
+<div class="container">
+    <div class="mt-4">
+        <app-titulo titulo="Modulo de Entradas"></app-titulo>
+    </div>
 
-    <app-listar-entradas></app-listar-entradas>
+    <div class="row g-3">
+        <div class="col-12 col-md-6">
+            <app-button [routerLink]="'/admin/salidas/registrar-salidas'" label="Registrar" icon="fas fa-user-plus"
+                color="button">
+            </app-button>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <app-button label="Reporte" icon="fas fa-file-pdf" color="button" (click)="descargarPDF()">
+            </app-button>
+        </div>
+    </div>
+    <app-tabla [columnas]="columnas" [datos]="detalleEntrada" [botonesConfig]="botonesConfig"
+        [onVer]="verDetalle.bind(this)">
+    </app-tabla>
+
+</div>

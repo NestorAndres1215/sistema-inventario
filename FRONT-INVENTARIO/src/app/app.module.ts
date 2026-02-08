@@ -66,7 +66,6 @@ import { ListarInventarioComponent } from './pages/usuario/inventario-usuario/li
 import { GoogleChartsModule } from 'angular-google-charts';
 import {MatDialogModule} from '@angular/material/dialog';
 import { EntradasComponent } from './pages/admin/entradas/entradas.component';
-import { ListarEntradasComponent } from './pages/admin/entradas/listar-entradas/listar-entradas.component';
 import { RegistrarEntradaComponent } from './pages/admin/entradas/registrar-entrada/registrar-entrada.component';
 import { DetalleEntradaComponent } from './pages/admin/entradas/detalle-entrada/detalle-entrada.component';
 import { SalidasComponent } from './pages/admin/salidas/salidas.component';
@@ -138,7 +137,7 @@ import { TablaComponent } from './shared/tabla/tabla.component';
     ListarInventarioComponent,
 
     EntradasComponent,
-    ListarEntradasComponent,
+ 
     RegistrarEntradaComponent,
     DetalleEntradaComponent,
     SalidasComponent,
