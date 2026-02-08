@@ -1,13 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../../core/services/login.service';
 
-interface Usuario {
-  id: number;
-  nombre?: string;
-  email?: string;
-  // Agrega otros campos según tu modelo de usuario
-}
-
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.component.html',
@@ -21,7 +14,6 @@ export class PrincipalComponent implements OnInit {
 
   ngOnInit(): void {
     this.actualizarUsuario();
-    // Escucha cambios en el estado de login
     this.loginService.loginStatusSubject.asObservable().subscribe(() => {
       this.actualizarUsuario();
     });

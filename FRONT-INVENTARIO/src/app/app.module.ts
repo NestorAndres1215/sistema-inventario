@@ -30,16 +30,16 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { LoginComponent } from './features/config/login/login.component';
 import { HomeComponent } from './features/config/home/home.component';
 
-import { DashboardComponent } from './pages/admin/home-admin/home-admin.component';
+import { DashboardComponent } from './features/admin/home-admin/home-admin.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NavbarAdminComponent } from './shared/navbar-admin/navbar-admin.component';
-import { PrincipalComponent } from './pages/admin/principal/principal.component';
+import { PrincipalComponent } from './features/admin/principal/principal.component';
 import { PerfilComponent } from './pages/admin/perfil/perfil.component';
 import { ProductosComponent } from './pages/admin/productos/productos.component';
 import { UsuarioComponent } from './pages/admin/usuario/usuario.component';
 import { ProveedorComponent } from './pages/admin/proveedor/proveedor.component';
 
-import { ConfiguracionComponent } from './pages/admin/configuracion/configuracion.component';
+import { ConfiguracionComponent } from './features/admin/configuracion/configuracion.component';
 import { CrearProductoComponent } from './pages/admin/productos/crear-producto/crear-producto.component';
 import { ActualizarProductoComponent } from './pages/admin/productos/actualizar-producto/actualizar-producto.component';
 
@@ -101,6 +101,7 @@ import { RegistarSalidaUsuarioComponent } from './pages/usuario/salida-usuario/r
 import { RegistrarEntradaUsuarioComponent } from './pages/usuario/entrada-usuario/registrar-entrada-usuario/registrar-entrada-usuario.component';
 import { authInterceptorProviders } from './core/interceptors/auth.interceptor';
 import { ButtonComponent } from './shared/button/button.component';
+import { TituloComponent } from './shared/titulo/titulo.component';
 
 @NgModule({
   declarations: [
@@ -175,7 +176,8 @@ import { ButtonComponent } from './shared/button/button.component';
     GuardarInventarioComponent,
     RegistarSalidaUsuarioComponent,
     RegistrarEntradaUsuarioComponent,
-    ButtonComponent
+    ButtonComponent,
+    TituloComponent
   ],
   imports: [
     GoogleChartsModule,

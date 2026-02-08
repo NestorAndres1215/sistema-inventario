@@ -1,15 +1,15 @@
 
-import { DashboardComponent } from './pages/admin/home-admin/home-admin.component';
+import { DashboardComponent } from './features/admin/home-admin/home-admin.component';
 import { LoginComponent } from './features/config/login/login.component';
 import { HomeComponent } from './features/config/home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PrincipalComponent } from './pages/admin/principal/principal.component';
+import { PrincipalComponent } from './features/admin/principal/principal.component';
 import { PerfilComponent } from './pages/admin/perfil/perfil.component';
 import { ProveedorComponent } from './pages/admin/proveedor/proveedor.component';
 import { ProductosComponent } from './pages/admin/productos/productos.component';
 import { UsuarioComponent } from './pages/admin/usuario/usuario.component';
-import { ConfiguracionComponent } from './pages/admin/configuracion/configuracion.component';
+import { ConfiguracionComponent } from './features/admin/configuracion/configuracion.component';
 
 
 import { CrearProductoComponent } from './pages/admin/productos/crear-producto/crear-producto.component';
