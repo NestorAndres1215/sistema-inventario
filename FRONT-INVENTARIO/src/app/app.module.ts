@@ -60,7 +60,7 @@ import { DetalleUsuarioComponent } from './features/admin/usuario/detalle-usuari
 import { DetalleProveedorComponent } from './pages/admin/proveedor/detalle-proveedor/detalle-proveedor.component';
 import { DetalleProductoComponent } from './pages/admin/productos/detalle-producto/detalle-producto.component';
 
-import { ReclamosComponent } from './pages/admin/reclamos/reclamos.component';
+import { ReclamosComponent } from './features/admin/reclamos/reclamos.component';
 import { ListarInventarioComponent } from './pages/usuario/inventario-usuario/listar-inventario/listar-inventario.component';
 
 import { GoogleChartsModule } from 'angular-google-charts';
@@ -71,7 +71,6 @@ import { RegistrarEntradaComponent } from './pages/admin/entradas/registrar-entr
 import { DetalleEntradaComponent } from './pages/admin/entradas/detalle-entrada/detalle-entrada.component';
 import { SalidasComponent } from './pages/admin/salidas/salidas.component';
 import { RegistrarSalidasComponent } from './pages/admin/salidas/registrar-salidas/registrar-salidas.component';
-import { ListarSalidasComponent } from './pages/admin/salidas/listar-salidas/listar-salidas.component';
 import { DetalleSalidasComponent } from './pages/admin/salidas/detalle-salidas/detalle-salidas.component';
 
 import { SalidaUsuarioComponent } from './pages/usuario/salida-usuario/salida-usuario.component';
@@ -80,8 +79,8 @@ import { ListarEntradasUsuarioComponent } from './pages/usuario/entrada-usuario/
 import { ListarSalidaUsuarioComponent } from './pages/usuario/salida-usuario/listar-salida-usuario/listar-salida-usuario.component';
 import { ActualizarUsuarioComponent } from './features/admin/usuario/actualizar-usuario/actualizar-usuario.component';
 import { NosotrosComponent } from './pages/empresa/nosotros/nosotros.component';
-import { ListarReclamoActivadosComponent } from './pages/admin/reclamos/listar-reclamo-activados/listar-reclamo-activados.component';
-import { ListarReclamoDesactivadosComponent } from './pages/admin/reclamos/listar-reclamo-desactivados/listar-reclamo-desactivados.component';
+import { ListarReclamoActivadosComponent } from './features/admin/reclamos/listar-reclamo-activados/listar-reclamo-activados.component';
+import { ListarReclamoDesactivadosComponent } from './features/admin/reclamos/listar-reclamo-desactivados/listar-reclamo-desactivados.component';
 import { GuardarReclamoComponent } from './pages/admin/reclamos/guardar-reclamo/guardar-reclamo.component';
 import { ResponderCorreoComponent } from './pages/admin/reclamos/responder-correo/responder-correo.component';
 import { PerfilUsuarioComponent } from './pages/usuario/perfil-usuario/perfil-usuario.component';
@@ -144,7 +143,6 @@ import { TablaComponent } from './shared/tabla/tabla.component';
     DetalleEntradaComponent,
     SalidasComponent,
     RegistrarSalidasComponent,
-    ListarSalidasComponent,
     DetalleSalidasComponent,
    
     SalidaUsuarioComponent,
