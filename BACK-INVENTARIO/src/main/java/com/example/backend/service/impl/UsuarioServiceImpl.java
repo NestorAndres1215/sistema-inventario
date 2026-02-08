@@ -247,7 +247,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     }
 
-
+@Override
     public boolean usuarioExistePorUsername(String username) {
         return usuarioRepository.existsByUsername(username);
     }

@@ -9,6 +9,7 @@ import com.example.backend.exception.ResourceNotFoundException;
 import com.example.backend.security.JwtUtils;
 import com.example.backend.security.UserDetailsServiceImpl;
 import com.example.backend.service.AuthService;
+import com.example.backend.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

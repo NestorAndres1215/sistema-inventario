@@ -3,6 +3,7 @@ package com.example.backend.service.pdf;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 import com.example.backend.entity.Usuario;
+import com.example.backend.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.itextpdf.text.BaseColor;

@@ -48,4 +48,6 @@ public interface UsuarioService {
     Usuario buscarPorEmail(String email);
 
     Usuario actualizarUsuario(Long id, UsuarioRequest dto);
+
+    boolean usuarioExistePorUsername(String username);
 }

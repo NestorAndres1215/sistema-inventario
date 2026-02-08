@@ -35,17 +35,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String jwtToken = null;
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
             jwtToken = requestTokenHeader.substring(7);
-
-            try {
                 username = this.jwtUtil.extractUsername(jwtToken);
-            } catch (Exception e) {
-                e.printStackTrace();
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                response.setContentType("text/plain");
-                response.getWriter().write("TOKEN EXPIRADO");
-                return; // Finalizar el filtro aquí
-            }
-
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

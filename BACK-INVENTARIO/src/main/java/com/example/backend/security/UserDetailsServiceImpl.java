@@ -1,5 +1,6 @@
 package com.example.backend.security;
 
+import com.example.backend.constants.NotFoundMessages;
 import com.example.backend.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String input) throws UsernameNotFoundException {
         return usuarioRepository.findByUsername(input)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException("USUARIO NO ENCONTRADO"));
+                        new UsernameNotFoundException(NotFoundMessages.USUARIO_NO_ENCONTRADO));
     }
 }
