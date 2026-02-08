@@ -12,6 +12,27 @@ export class ListarActivadasProveedorComponent implements OnInit {
   nombre: string = '';
   ruc: string = '';
   proveedores: any[] = [];
+columnas = [
+  { clave: 'nombre', etiqueta: 'Nombre' },
+  { clave: 'telefono', etiqueta: 'Teléfono' },
+  { clave: 'ruc', etiqueta: 'RUC' },
+  { clave: 'email', etiqueta: 'Correo' },
+  { clave: 'direccion', etiqueta: 'Dirección' }
+];
+
+botonesConfig = {
+  ver: true,
+  editar: true,
+  desactivar: true
+};
+
+verProveedor(item: any) {
+  return ['/admin/proveedor/detalle', item.proveedorId];
+}
+
+editarProveedor(item: any) {
+  return ['/admin/proveedor', item.proveedorId];
+}
 
   proveedorId: string = '';
   productos: any;
