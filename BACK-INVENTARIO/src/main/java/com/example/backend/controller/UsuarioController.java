@@ -15,8 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios")
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
-        RequestMethod.DELETE}, allowedHeaders = "*")
+@Tag(name = "Usuaurio")
 @RequiredArgsConstructor
 @Tag(name = "Usuario")
 public class UsuarioController {

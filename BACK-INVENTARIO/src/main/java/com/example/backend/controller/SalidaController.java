@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.example.backend.entity.DetalleSalida;
 import com.example.backend.service.DetalleSalidaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,8 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/salidas")
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
-        RequestMethod.DELETE}, allowedHeaders = "*")
+@Tag(name = "Salidas")
 @RequiredArgsConstructor
 public class SalidaController {
 

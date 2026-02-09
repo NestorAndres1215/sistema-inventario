@@ -2,6 +2,7 @@ package com.example.backend.controller;
 
 import com.example.backend.entity.DetalleEntrada;
 import com.example.backend.service.DetalleEntradaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 
@@ -21,8 +22,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/entradas")
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
-        RequestMethod.DELETE}, allowedHeaders = "*")
+@Tag(name = "Entradas")
 @RequiredArgsConstructor
 public class EntradaController {
 

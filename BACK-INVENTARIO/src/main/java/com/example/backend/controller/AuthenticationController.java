@@ -16,7 +16,6 @@ import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller
-@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 @Tag(name = "Autheticacion")

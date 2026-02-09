@@ -3,6 +3,7 @@ package com.example.backend.controller;
 import java.io.IOException;
 
 import com.example.backend.service.pdf.*;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,8 +18,7 @@ import com.itextpdf.text.DocumentException;
 
 @RestController
 @RequestMapping("/pdf")
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
-        RequestMethod.DELETE}, allowedHeaders = "*")
+@Tag(name = "Pdf")
 @RequiredArgsConstructor
 public class PdfController {
 

@@ -3,6 +3,7 @@ package com.example.backend.controller;
 import com.example.backend.entity.Reclamos;
 
 import com.example.backend.service.ReclamoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequiredArgsConstructor
+@Tag(name = "Correo")
 public class CorreoController {
 
     private final ReclamoService reclamoService;

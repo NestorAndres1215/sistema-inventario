@@ -8,29 +8,30 @@ import com.example.backend.entity.Producto;
 import org.springframework.data.jpa.repository.Query;
 
 
-public interface ProductoRepository extends JpaRepository<Producto, Long>{
-	List<Producto> findByEstadoIsTrue();
-	
-	List<Producto> findByEstadoIsFalse();
+public interface ProductoRepository extends JpaRepository<Producto, Long> {
+    List<Producto> findByEstadoIsTrue();
 
+    List<Producto> findByEstadoIsFalse();
 
-	// ------------------ STOCK ------------------
+    List<Producto> findByNombreContainingIgnoreCase(String nombre);
 
-	// Producto con mayor stock
-	@Query("SELECT p FROM Producto p ORDER BY p.stock DESC")
-	List<Producto> findTopByStockDesc();
+    List<Producto> findByStockLessThanEqual(int stock);
 
-	// Producto con menor stock
-	@Query("SELECT p FROM Producto p ORDER BY p.stock ASC")
-	List<Producto> findTopByStockAsc();
+    List<Producto> findByStockEquals(int stock);
 
-	// ------------------ POR PROVEEDOR ------------------
-	List<Producto> findByProveedorProveedorId(Long proveedorId);
+    List<Producto> findByProveedorProveedorId(Long proveedorId);
 
-	// ------------------ TOP 10 MÁS BARATOS ------------------
-	List<Producto> findTop10ByOrderByPrecioAsc();
+    List<Producto> findTop10ByOrderByPrecioAsc();
 
-	// Opcional: solo productos activos
-	List<Producto> findTop10ByEstadoIsTrueOrderByPrecioAsc();
+    List<Producto> findTop10ByOrderByPrecioDesc();
+
+    List<Producto> findTop10ByEstadoIsTrueOrderByPrecioAsc();
+
+    List<Producto> findTop10ByEstadoIsTrueOrderByPrecioDesc();
+
+    Producto findTopByOrderByStockDesc();
+
+    Producto findTopByOrderByStockAsc();
+
 
 }

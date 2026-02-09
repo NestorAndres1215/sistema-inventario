@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.example.backend.dto.request.ProveedorRequest;
 import com.example.backend.service.ProveedorService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,7 @@ import com.example.backend.repository.ProveedorRepository;
 
 @RestController
 @RequestMapping("/proveedor")
-
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
-        RequestMethod.DELETE}, allowedHeaders = "*")
+@Tag(name = "Proveedor")
 @RequiredArgsConstructor
 public class ProveedorController {
 

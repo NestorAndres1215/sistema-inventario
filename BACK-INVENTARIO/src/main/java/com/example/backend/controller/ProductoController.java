@@ -1,26 +1,19 @@
 package com.example.backend.controller;
 
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-
-import com.example.backend.dto.ProductoDTO;
+import com.example.backend.dto.request.ProductoRequest;
 import com.example.backend.service.ProductoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.example.backend.entity.Producto;
 
 @RestController
 @RequestMapping("/producto")
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
-        RequestMethod.DELETE}, allowedHeaders = "*")
+@Tag(name = "Producto")
 @RequiredArgsConstructor
 public class ProductoController {
-
 
     private final ProductoService productoService;
 
@@ -31,12 +24,7 @@ public class ProductoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Producto> obtenerPorId(@PathVariable Long id) {
-        Producto producto = productoService.obtenerProductoPorId(id);
-        if (producto != null) {
-            return ResponseEntity.ok(producto);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(productoService.obtenerProductoPorId(id));
     }
 
     @GetMapping("/activadas")
@@ -49,75 +37,74 @@ public class ProductoController {
         return productoService.obtenerProductosDesactivados();
     }
 
-
     @PostMapping("/")
-    public ResponseEntity<Producto> agregarProducto(@RequestBody ProductoDTO productoDTO) {
-        Producto productoGuardado = productoService.agregarProducto(productoDTO);
-        return ResponseEntity.ok(productoGuardado);
+    public ResponseEntity<Producto> agregarProducto(@RequestBody ProductoRequest productoDTO) {
+        return ResponseEntity.ok(productoService.agregarProducto(productoDTO));
     }
-
 
     @PutMapping("/actualizar")
     public ResponseEntity<Producto> actualizarProducto(
-            @RequestBody ProductoDTO productoDTO) {
-
-        Producto actualizado = productoService.actualizarProducto(productoDTO);
-
-            return ResponseEntity.ok(actualizado);
-
+            @RequestBody ProductoRequest productoDTO) {
+        return ResponseEntity.ok(productoService.actualizarProducto(productoDTO));
     }
 
-
     @PostMapping("/activar/{id}")
-    public ResponseEntity<Map<String, String>> activarProducto(@PathVariable Long id) {
-        boolean activado = productoService.activarProducto(id);
-        Map<String, String> response = new HashMap<>();
-
-        response.put("mensaje", "Producto activado con éxito");
-        return ResponseEntity.ok(response);
-
+    public ResponseEntity<Producto> activarProducto(@PathVariable Long id) {
+        return ResponseEntity.ok(productoService.activarProducto(id));
     }
 
     @PostMapping("/desactivar/{id}")
-    public ResponseEntity<Map<String, String>> desactivarProducto(@PathVariable Long id) {
-        boolean desactivado = productoService.desactivarProducto(id);
-        Map<String, String> response = new HashMap<>();
-
-        response.put("mensaje", "Producto desactivado con éxito");
-        return ResponseEntity.ok(response);
-
+    public ResponseEntity<Producto> desactivarProducto(@PathVariable Long id) {
+        return ResponseEntity.ok(productoService.desactivarProducto(id));
     }
 
-    // ------------------ STOCK ------------------
     @GetMapping("/mayor-stock")
     public ResponseEntity<Producto> productoConMayorStock() {
-        Producto producto = productoService.productoConMayorStock();
-        return producto != null ? ResponseEntity.ok(producto) : ResponseEntity.noContent().build();
+        return ResponseEntity.ok(productoService.productoConMayorStock());
     }
 
     @GetMapping("/menor-stock")
     public ResponseEntity<Producto> productoConMenorStock() {
-        Producto producto = productoService.productoConMenorStock();
-        return producto != null ? ResponseEntity.ok(producto) : ResponseEntity.noContent().build();
+        return ResponseEntity.ok(productoService.productoConMenorStock());
     }
 
-    // ------------------ POR PROVEEDOR ------------------
     @GetMapping("/proveedor/{proveedorId}")
     public ResponseEntity<List<Producto>> listarPorProveedor(@PathVariable Long proveedorId) {
-        List<Producto> productos = productoService.listarProductosPorProveedor(proveedorId);
-        return ResponseEntity.ok(productos);
+        return ResponseEntity.ok(productoService.listarProductosPorProveedor(proveedorId));
     }
 
-    // ------------------ TOP 10 MÁS BARATOS ------------------
     @GetMapping("/top10-mas-baratos")
     public ResponseEntity<List<Producto>> top10ProductosMasBaratos() {
-        List<Producto> productos = productoService.top10ProductosMasBaratos();
-        return ResponseEntity.ok(productos);
+        return ResponseEntity.ok(productoService.top10ProductosMasBaratos());
     }
 
     @GetMapping("/top10-mas-baratos-activos")
     public ResponseEntity<List<Producto>> top10ProductosMasBaratosActivos() {
-        List<Producto> productos = productoService.top10ProductosMasBaratosActivos();
-        return ResponseEntity.ok(productos);
+        return ResponseEntity.ok(productoService.top10ProductosMasBaratosActivos());
+    }
+
+    @GetMapping("/top10-mas-caros-activos")
+    public ResponseEntity<List<Producto>> top10ProductosMasCarosActivos() {
+        return ResponseEntity.ok(productoService.top10ProductosMasCarosActivos());
+    }
+
+    @GetMapping("/stock-bajo")
+    public List<Producto> stockBajo(@RequestParam(defaultValue = "5") int limite) {
+        return productoService.productosConStockBajo(limite);
+    }
+
+    @GetMapping("/sin-stock")
+    public List<Producto> sinStock() {
+        return productoService.productosSinStock();
+    }
+
+    @GetMapping("/buscar")
+    public List<Producto> buscar(@RequestParam String nombre) {
+        return productoService.listarPorNombre(nombre);
+    }
+
+    @GetMapping("/top10-mas-caros")
+    public List<Producto> masCaros() {
+        return productoService.top10ProductosMasCaros();
     }
 }
