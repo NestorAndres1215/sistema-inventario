@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ProveedorService } from 'src/app/core/services/proveedor.service';
+import { TITULO_MESAJES, MENSAJES } from 'src/app/core/constants/messages';
+import { AlertService } from 'src/app/core/services/alert.service';
+import { Proveedor } from 'src/app/core/models/proveedor';
 
 @Component({
   selector: 'app-crear-proveedor',
@@ -14,7 +17,7 @@ export class CrearProveedorComponent implements OnInit {
   proveedorForm!: FormGroup;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: FormBuilder, private alertService: AlertService,
     private proveedorService: ProveedorService,
     private router: Router
   ) { }
@@ -30,50 +33,34 @@ export class CrearProveedorComponent implements OnInit {
   }
 
   crearProveedor(): void {
-    if (this.proveedorForm.invalid) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Faltan datos',
-        text: 'Por favor, complete todos los campos correctamente.'
-      });
+
+    if (!this.proveedorForm.valid) {
+      this.alertService.advertencia(TITULO_MESAJES.CAMPOS_INCOMPLETOS_TITULO, MENSAJES.CAMPOS_INCOMPLETOS_MENSAJE);
+      this.proveedorForm.markAllAsTouched();
       return;
     }
 
-    const { nombre, email, telefono, direccion, ruc } = this.proveedorForm.value;
 
-    this.proveedorService.agregarProveedor(nombre, ruc, direccion, telefono, email)
+const obj: Proveedor = {
+  nombre: this.proveedorForm.value.nombre,
+  email: this.proveedorForm.value.email,
+  telefono: this.proveedorForm.value.telefono,
+  direccion: this.proveedorForm.value.direccion,
+  ruc: this.proveedorForm.value.ruc
+};
+    this.proveedorService.agregarProveedor(obj)
       .subscribe({
         next: (respuesta: any) => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Proveedor creado',
-            text: 'El proveedor se ha creado correctamente.'
-          });
+          this.alertService.aceptacion(TITULO_MESAJES.REGISTRO_EXITOSO_TITULO, MENSAJES.REGISTRO_EXITOSO_MENSAJE);
           this.router.navigate(['/admin/proveedor']);
         },
         error: (error: any) => {
-          console.error('Error al crear el proveedor:', error);
-          Swal.fire({
-            icon: 'error',
-            title: 'Error al crear el proveedor',
-            text: 'Ocurrió un error al crear el proveedor. Por favor, inténtelo de nuevo.'
-          });
+          this.alertService.error(TITULO_MESAJES.ERROR_TITULO, error.error.message);
         }
       });
   }
 
-  limitarLongitud(event: any, maxLength: number) {
-    const input = event.target;
-    if (input.value.length > maxLength) {
-      input.value = input.value.slice(0, maxLength);
-    }
-  }
 
-  validarNumeroPositivo(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    let value = input.value;
-    value = value.replace(/[^0-9]/g, '');
-    input.value = value;
-  }
+
 
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MENSAJES, TITULO_MESAJES } from 'src/app/core/constants/messages';
+import { AlertService } from 'src/app/core/services/alert.service';
 import { ProveedorService } from 'src/app/core/services/proveedor.service';
 import Swal from 'sweetalert2';
 
@@ -9,71 +11,70 @@ import Swal from 'sweetalert2';
   styleUrls: ['./listar-desactivar-proveedor.component.css']
 })
 export class ListarDesactivarProveedorComponent implements OnInit {
+
   nombre: string = '';
-  ruc: string = '';
-  proveedor: any = [];
-  proveedorId: string = '';
-  proveedores: any;
-  constructor(private proveedorService: ProveedorService,
-    private router:Router) { }
+
+  proveedores: any[] = [];
+  proveedoresOriginal: any[] = [];
+
+  columnas = [
+    { clave: 'nombre', etiqueta: 'Nombre' },
+    { clave: 'telefono', etiqueta: 'Teléfono' },
+    { clave: 'ruc', etiqueta: 'RUC' },
+    { clave: 'email', etiqueta: 'Correo' },
+    { clave: 'direccion', etiqueta: 'Dirección' }
+  ];
+
+  botonesConfig = {
+    ver: true,
+    activar: true
+  };
+
+  constructor(
+    private alertService:AlertService,
+    private proveedorService: ProveedorService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.obtenerMarcasDesactivadas();
-  }
-  obtenerMarcasDesactivadas() {
-    this.proveedorService.listarProveedoresDesactivados().subscribe(
-      (marcas: any) => {
-        this.proveedores = marcas;
-      },
-      (error: any) => {
-        console.log("Error al obtener las marcas: ", error);
-      }
-    );
+    this.obtenerProveedoresDesactivados();
   }
 
+  obtenerProveedoresDesactivados() {
+    this.proveedorService.listarProveedoresDesactivados().subscribe({
+      next: (data: any[]) => {
+        this.proveedoresOriginal = data;
+        this.proveedores = data;
+      },
+    });
+  }
 
   buscarPorNombre() {
-    try {
-      if (this.nombre && this.proveedores) {
-        this.proveedores = this.proveedores.filter((proveedor: any) =>
-          proveedor.nombre.toLowerCase().includes(this.nombre.toLowerCase()) ||
-          proveedor.ruc.toLowerCase().includes(this.nombre.toLowerCase())
-        );
-      } else {
-        this.restaurarProveedores();
-        console.log("Ingrese un nombre o RUC para buscar.");
-      }
-    } catch (error) {
-      console.log("Error en la búsqueda: ", error);
-      // Realizar acciones de manejo de errores, como mostrar un mensaje al usuario
+    const valor = this.nombre.trim().toLowerCase();
+
+    if (!valor) {
+      this.proveedores = this.proveedoresOriginal;
+      return;
     }
-  }
-  restaurarProveedores() {
-    this.nombre = ''; // Restablecer el valor del nombre a vacío
-    this.ruc = '';
-    this.proveedorService.listarProveedoresActivos().subscribe(
-      (proveedores: any) => {
-        this.proveedores = proveedores;
-      },
-      (error: any) => {
-        console.log("Error al obtener las categorías: ", error);
-      }
+
+    this.proveedores = this.proveedoresOriginal.filter(p =>
+      p.nombre?.toLowerCase().includes(valor) ||
+      p.ruc?.toLowerCase().includes(valor)
     );
   }
 
-  activarProveedor(proveedorId: any) {
-    this.proveedorService.activarProveedor(proveedorId).subscribe(
-      () => {
-        console.log('Proveedor activada exitosamente');
-        Swal.fire('Éxito!', 'Proveedor activada exitosamente', 'success');
-        this.obtenerMarcasDesactivadas();
+  verProveedor(item: any) {
+    return ['/admin/proveedor/detalle', item.proveedorId];
+  }
+
+  activarProveedor(item: any) {
+    this.proveedorService.activarProveedor(item.proveedorId).subscribe({
+      next: () => {
+         this.alertService.error(TITULO_MESAJES.ACTIVADO, MENSAJES.ACTIVADO);
+        this.obtenerProveedoresDesactivados();
         this.router.navigate(['/admin/proveedor']);
       },
-      (error) => {
-        console.log('Error al activar la Proveedor:', error);
-        Swal.fire('Error!', 'Error al activar la Proveedor', 'error');
-      }
-    );
+    });
   }
-
 }
+

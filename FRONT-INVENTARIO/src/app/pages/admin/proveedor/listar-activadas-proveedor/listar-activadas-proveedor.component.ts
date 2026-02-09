@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MENSAJES, TITULO_MESAJES } from 'src/app/core/constants/messages';
+import { AlertService } from 'src/app/core/services/alert.service';
+
 import { ProveedorService } from 'src/app/core/services/proveedor.service';
 import { ReportesService } from 'src/app/core/services/reportes.service';
-import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-listar-activadas-proveedor',
   templateUrl: './listar-activadas-proveedor.component.html',
@@ -12,33 +15,32 @@ export class ListarActivadasProveedorComponent implements OnInit {
   nombre: string = '';
   ruc: string = '';
   proveedores: any[] = [];
-columnas = [
-  { clave: 'nombre', etiqueta: 'Nombre' },
-  { clave: 'telefono', etiqueta: 'Teléfono' },
-  { clave: 'ruc', etiqueta: 'RUC' },
-  { clave: 'email', etiqueta: 'Correo' },
-  { clave: 'direccion', etiqueta: 'Dirección' }
-];
+  columnas = [
+    { clave: 'nombre', etiqueta: 'Nombre' },
+    { clave: 'telefono', etiqueta: 'Teléfono' },
+    { clave: 'ruc', etiqueta: 'RUC' },
+    { clave: 'email', etiqueta: 'Correo' },
+    { clave: 'direccion', etiqueta: 'Dirección' }
+  ];
 
-botonesConfig = {
-  ver: true,
-  editar: true,
-  desactivar: true
-};
+  botonesConfig = {
+    ver: true,
+    editar: true,
+    desactivar: true
+  };
 
-verProveedor(item: any) {
-  return ['/admin/proveedor/detalle', item.proveedorId];
-}
+  verProveedor(item: any) {
+    return ['/admin/proveedor/detalle', item.proveedorId];
+  }
 
-editarProveedor(item: any) {
-  return ['/admin/proveedor', item.proveedorId];
-}
+  editarProveedor(item: any) {
+    return ['/admin/proveedor', item.proveedorId];
+  }
 
   proveedorId: string = '';
   productos: any;
-  //proveedores: any;
 
-  constructor(private proveedorService: ProveedorService, private reporteSalida: ReportesService) { }
+  constructor(private alertService: AlertService, private proveedorService: ProveedorService, private reporteSalida: ReportesService) { }
 
   ngOnInit(): void {
     this.obtenerProveedr();
@@ -48,65 +50,45 @@ editarProveedor(item: any) {
     this.proveedorService.listarProveedoresActivos().subscribe(
       (marcas: any) => {
         this.proveedores = marcas;
-      },
-      (error: any) => {
-        console.log("Error al obtener las marcas: ", error);
       }
     );
   }
   buscarPorNombre() {
-    try {
-      if (this.nombre && this.proveedores) {
-        this.proveedores = this.proveedores.filter((proveedor: any) =>
-          proveedor.nombre.toLowerCase().includes(this.nombre.toLowerCase()) ||
-          proveedor.ruc.toLowerCase().includes(this.nombre.toLowerCase())
-        );
-      } else {
-        this.restaurarProveedores();
-        console.log("Ingrese un nombre o RUC para buscar.");
-      }
-    } catch (error) {
-      console.log("Error en la búsqueda: ", error);
-      // Realizar acciones de manejo de errores, como mostrar un mensaje al usuario
+
+    if (this.nombre && this.proveedores) {
+      this.proveedores = this.proveedores.filter((proveedor: any) =>
+        proveedor.nombre.toLowerCase().includes(this.nombre.toLowerCase()) ||
+        proveedor.ruc.toLowerCase().includes(this.nombre.toLowerCase())
+      );
+    } else {
+      this.restaurarProveedores();
     }
+
   }
   restaurarProveedores() {
-    this.nombre = ''; // Restablecer el valor del nombre a vacío
+    this.nombre = '';
 
     this.proveedorService.listarProveedoresActivos().subscribe(
       (proveedores: any) => {
         this.proveedores = proveedores;
       },
-      (error: any) => {
-        console.log("Error al obtener las categorías: ", error);
-      }
     );
   }
   desactivarProveedor(proveedorId: any): void {
     this.proveedorService.desactivarProveedor(proveedorId).subscribe(
-      (respuesta: any) => {
-        // Desactivación exitosa
-        Swal.fire({
-          icon: 'success',
-          title: 'Categoría desactivada',
-          text: respuesta.mensaje
-        });
+      () => {
 
-        // Actualizar la lista de categorías activadas
+
+        this.alertService.error(TITULO_MESAJES.DESACTIVADO, MENSAJES.ACTIVADO);
         this.obtenerProveedr();
       },
       (error: any) => {
-        // Error al desactivar la categoría
-        Swal.fire({
-          icon: 'error',
-          title: 'Error al desactivar la categoría',
-          text: error.error.mensaje
-        });
+        this.alertService.error(TITULO_MESAJES.ERROR_TITULO, error.error.message);
       }
     );
   }
-  pageSize = 5; // Tamaño de página (número de elementos por página)
-  pageIndex = 0; // Índice de página actual
+  pageSize = 5;
+  pageIndex = 0;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 

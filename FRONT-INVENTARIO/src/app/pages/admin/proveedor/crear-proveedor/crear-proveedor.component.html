@@ -1,4 +1,4 @@
-<body>
+
   <div class="container">
     <h1><i class="fas fa-truck"></i> Agregar Nuevo Proveedor</h1>
     <hr>
@@ -22,7 +22,7 @@
           <mat-form-field appearance="outline">
             <mat-label><i class="fas fa-phone"></i> Teléfono Proveedor</mat-label>
             <input matInput placeholder="Digite el teléfono del proveedor" formControlName="telefono"
-              (input)="limitarLongitud($event, 9); validarNumeroPositivo($event)">
+              >
           </mat-form-field>
         </div>
         <div class="form-column">
@@ -36,8 +36,7 @@
         <div class="form-column">
           <mat-form-field appearance="outline">
             <mat-label><i class="fas fa-id-card"></i> RUC Proveedor</mat-label>
-            <input matInput placeholder="Digite el RUC del proveedor" formControlName="ruc"
-              (input)="limitarLongitud($event, 11); validarNumeroPositivo($event)">
+            <input matInput placeholder="Digite el RUC del proveedor" formControlName="ruc">
           </mat-form-field>
         </div>
         <div class="form-column">
@@ -48,4 +47,4 @@
       </div>
     </form>
   </div>
-</body>
+
