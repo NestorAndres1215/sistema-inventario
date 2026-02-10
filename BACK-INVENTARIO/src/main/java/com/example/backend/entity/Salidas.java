@@ -24,9 +24,6 @@ public class Salidas {
     @Column(name = "sa_codigo")
     private Long salidaId;
 
-    @Column(name = "sa_numero", nullable = false, unique = true)
-    private String numero;
-
     @Column(name = "sa_fecha_salida")
     private LocalDate fechaSalida;
 

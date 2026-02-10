@@ -34,39 +34,61 @@ public class SalidaServiceImpl implements SalidaService {
     @Override
     public List<DetalleSalida> crearDetalleSalida(List<SalidasRequest> listaDetalleSalida) {
 
+        if (listaDetalleSalida == null || listaDetalleSalida.isEmpty()) {
+            throw new IllegalArgumentException("La lista de detalles no puede estar vacía");
+        }
+
         List<DetalleSalida> detallesAGuardar = new ArrayList<>();
         BigDecimal totalSalida = BigDecimal.ZERO;
+
         SalidasRequest primerDetalle = listaDetalleSalida.get(0);
+
         Usuario usuario = usuarioRepository.findByUsername(primerDetalle.getUsuario())
-                .orElseThrow(() -> new ResourceNotFoundException(NotFoundMessages.USUARIO_NO_ENCONTRADO));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
 
         Salidas salida = Salidas.builder()
                 .usuario(usuario)
-                .numero(primerDetalle.getNumero())
                 .observacion(primerDetalle.getObservaciones())
                 .fechaSalida(primerDetalle.getFechaSalida())
                 .total(BigDecimal.ZERO)
+                .estado("REGISTRADO")
                 .build();
 
         salida = salidaRepository.save(salida);
 
-
         for (SalidasRequest detalle : listaDetalleSalida) {
 
-            Producto producto = productoRepository.findByNombre(detalle.getProducto())
-                    .orElseThrow(() -> new ResourceNotFoundException(NotFoundMessages.PRODUCTO_NO_ENCONTRADO));
+            List<Producto> productos =
+                    productoRepository.findByNombre(detalle.getProducto());
+
+            if (productos.isEmpty()) {
+                throw new ResourceNotFoundException(
+                        "Producto no encontrado: " + detalle.getProducto()
+                );
+            }
+
+            Producto producto = productos.get(0); // ✅
 
             int stockAnterior = producto.getStock();
             int stockActual = stockAnterior - detalle.getCantidad();
 
-            BigDecimal subtotal = detalle.getPrecioUnitario().multiply(BigDecimal.valueOf(detalle.getCantidad()));
+            if (stockActual < 0) {
+                throw new IllegalArgumentException(
+                        "Stock insuficiente para el producto: " + producto.getNombre()
+                );
+            }
+
+            BigDecimal precioUnitario = producto.getPrecio();
+            BigDecimal subtotal = precioUnitario.multiply(
+                    BigDecimal.valueOf(detalle.getCantidad())
+            );
 
             totalSalida = totalSalida.add(subtotal);
 
             DetalleSalida detalleSalida = DetalleSalida.builder()
                     .cantidad(detalle.getCantidad())
                     .descripcion(detalle.getDescripcion())
-                    .precioUnitario(detalle.getPrecioUnitario())
+                    .precioUnitario(precioUnitario)
                     .subtotal(subtotal)
                     .stockAnterior(stockAnterior)
                     .stockActual(stockActual)
@@ -88,6 +110,7 @@ public class SalidaServiceImpl implements SalidaService {
 
         return detallesAGuardar;
     }
+
 
     @Override
     public DetalleSalida obtenerPorId(Long id) {

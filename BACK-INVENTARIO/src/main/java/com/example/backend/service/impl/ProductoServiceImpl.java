@@ -11,6 +11,7 @@ import com.example.backend.service.ProductoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -75,6 +76,7 @@ public class ProductoServiceImpl implements ProductoService {
                 .stock(productoDTO.getStock())
                 .estado(true)
                 .proveedor(proveedor)
+                .fechaRegistro(LocalDate.now())
                 .build();
 
         return productoRepository.save(producto);

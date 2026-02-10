@@ -26,26 +26,21 @@ public class SalidasRequest {
     @NotBlank(message = "La descripción es obligatoria")
     private String descripcion;
 
-    private String observaciones; // opcional
+    private String observaciones;
 
-    @NotNull(message = "El total es obligatorio")
-    @DecimalMin(value = "0.0", inclusive = false, message = "El total debe ser mayor a 0")
-    private BigDecimal total;
+
 
     @NotBlank(message = "El usuario es obligatorio")
     private String usuario;
 
     @NotBlank(message = "El producto es obligatorio")
     private String producto;
-
-    @NotBlank(message = "El subtotal es obligatorio")
-    private BigDecimal subtotal;
-
     private LocalDate fechaSalida;
 
-    @NotBlank(message = "El número es obligatorio")
-    private String numero;
-
+/*      @NotNull(message = "El total es obligatorio")
+    @DecimalMin(value = "0.0", inclusive = false, message = "El total debe ser mayor a 0")
+    private BigDecimal total; @NotBlank(message = "El subtotal es obligatorio")
+    private BigDecimal subtotal;
     @NotNull(message = "El precio unitario es obligatorio")
     @DecimalMin(value = "0.0", inclusive = false, message = "El precio unitario debe ser mayor a 0")
     private BigDecimal precioUnitario;
@@ -54,5 +49,5 @@ public class SalidasRequest {
     private int stockAnterior;
 
     @Min(value = 0, message = "El stock actual no puede ser negativo")
-    private int stockActual;
+    private int stockActual;*/
 }

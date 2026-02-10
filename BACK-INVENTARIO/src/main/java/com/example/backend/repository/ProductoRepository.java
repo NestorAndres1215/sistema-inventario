@@ -15,6 +15,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
     List<Producto> findByEstadoIsFalse();
 
     List<Producto> findByNombreContainingIgnoreCase(String nombre);
+    List<Producto> findByNombre(String nombre);
 
     List<Producto> findByStockLessThanEqual(int stock);
 
@@ -34,6 +35,5 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
     Producto findTopByOrderByStockAsc();
 
-    Optional<Producto> findByNombre(String nombre);
 
 }
