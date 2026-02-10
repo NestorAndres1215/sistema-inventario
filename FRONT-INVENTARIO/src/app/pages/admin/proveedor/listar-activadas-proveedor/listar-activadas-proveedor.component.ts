@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 import { MENSAJES, TITULO_MESAJES } from 'src/app/core/constants/messages';
 import { AlertService } from 'src/app/core/services/alert.service';
 
@@ -29,9 +30,12 @@ export class ListarActivadasProveedorComponent implements OnInit {
     desactivar: true
   };
 
-  verProveedor(item: any) {
-    return ['/admin/proveedor/detalle', item.proveedorId];
-  }
+verProveedor(item: any) {
+  this.router.navigate([
+    '/admin/proveedor/detalle',
+    item.proveedorId
+  ]);
+}
 
   editarProveedor(item: any) {
     return ['/admin/proveedor', item.proveedorId];
@@ -40,7 +44,7 @@ export class ListarActivadasProveedorComponent implements OnInit {
   proveedorId: string = '';
   productos: any;
 
-  constructor(private alertService: AlertService, private proveedorService: ProveedorService, private reporteSalida: ReportesService) { }
+  constructor(private alertService: AlertService,private router:Router ,private proveedorService: ProveedorService, private reporteSalida: ReportesService) { }
 
   ngOnInit(): void {
     this.obtenerProveedr();

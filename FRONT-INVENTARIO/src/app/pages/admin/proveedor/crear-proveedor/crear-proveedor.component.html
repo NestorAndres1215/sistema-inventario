@@ -1,50 +1,45 @@
-
-  <div class="container">
-    <h1><i class="fas fa-truck"></i> Agregar Nuevo Proveedor</h1>
-    <hr>
-    <form [formGroup]="proveedorForm" class="form-grid" (ngSubmit)="crearProveedor()">
-      <div class="form-row">
-        <div class="form-column">
-          <mat-form-field appearance="outline">
-            <mat-label><i class="fas fa-store"></i> Nombre Proveedor</mat-label>
-            <input matInput placeholder="Digite el nombre del proveedor" formControlName="nombre">
-          </mat-form-field>
-        </div>
-        <div class="form-column">
-          <mat-form-field appearance="outline">
-            <mat-label><i class="fas fa-envelope"></i> Email Proveedor</mat-label>
-            <input matInput placeholder="Digite el email del proveedor" formControlName="email">
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-column">
-          <mat-form-field appearance="outline">
-            <mat-label><i class="fas fa-phone"></i> Teléfono Proveedor</mat-label>
-            <input matInput placeholder="Digite el teléfono del proveedor" formControlName="telefono"
-              >
-          </mat-form-field>
-        </div>
-        <div class="form-column">
-          <mat-form-field appearance="outline">
-            <mat-label><i class="fas fa-map-marker-alt"></i> Dirección Proveedor</mat-label>
-            <input matInput placeholder="Digite la dirección del proveedor" formControlName="direccion">
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-column">
-          <mat-form-field appearance="outline">
-            <mat-label><i class="fas fa-id-card"></i> RUC Proveedor</mat-label>
-            <input matInput placeholder="Digite el RUC del proveedor" formControlName="ruc">
-          </mat-form-field>
-        </div>
-        <div class="form-column">
-          <button type="submit" class="btn-action">
-            <i class="fas fa-plus-circle"></i> Registrar Proveedor
-          </button>
-        </div>
-      </div>
-    </form>
+<div class="container">
+  <div class="mt-4">
+    <app-titulo titulo="Registrar Proveedor"></app-titulo>
   </div>
-
+  <form [formGroup]="proveedorForm" class="form-grid" (ngSubmit)="crearProveedor()">
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label><i class="fas fa-store"></i> Nombre Proveedor</mat-label>
+          <input matInput placeholder="Digite el nombre del proveedor" formControlName="nombre">
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label><i class="fas fa-envelope"></i> Email Proveedor</mat-label>
+          <input matInput placeholder="Digite el email del proveedor" formControlName="email">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label><i class="fas fa-phone"></i> Teléfono Proveedor</mat-label>
+          <input matInput placeholder="Digite el teléfono del proveedor" formControlName="telefono">
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label><i class="fas fa-map-marker-alt"></i> Dirección Proveedor</mat-label>
+          <input matInput placeholder="Digite la dirección del proveedor" formControlName="direccion">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label><i class="fas fa-id-card"></i> RUC Proveedor</mat-label>
+          <input matInput placeholder="Digite el RUC del proveedor" formControlName="ruc">
+        </mat-form-field>
+      </div>
+      <app-button label="Registrar" icon="fas fa-user-plus" color="button">
+      </app-button>
+    </div>
+  </form>
+</div>

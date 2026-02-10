@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import baserUrl from 'src/app/core/models/helper';
-import { API_ENDPOINTS } from '../constants/api-endpoints';
-import { UsuarioValidator } from '../validator/usuario.validator';
-import { Usuario } from '../models/usuario';
+
 
 @Injectable({
   providedIn: 'root'

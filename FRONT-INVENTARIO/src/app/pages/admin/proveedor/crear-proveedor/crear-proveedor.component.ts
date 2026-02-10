@@ -41,16 +41,16 @@ export class CrearProveedorComponent implements OnInit {
     }
 
 
-const obj: Proveedor = {
-  nombre: this.proveedorForm.value.nombre,
-  email: this.proveedorForm.value.email,
-  telefono: this.proveedorForm.value.telefono,
-  direccion: this.proveedorForm.value.direccion,
-  ruc: this.proveedorForm.value.ruc
-};
+    const obj: Proveedor = {
+      nombre: this.proveedorForm.value.nombre,
+      email: this.proveedorForm.value.email,
+      telefono: this.proveedorForm.value.telefono,
+      direccion: this.proveedorForm.value.direccion,
+      ruc: this.proveedorForm.value.ruc
+    };
     this.proveedorService.agregarProveedor(obj)
       .subscribe({
-        next: (respuesta: any) => {
+        next: () => {
           this.alertService.aceptacion(TITULO_MESAJES.REGISTRO_EXITOSO_TITULO, MENSAJES.REGISTRO_EXITOSO_MENSAJE);
           this.router.navigate(['/admin/proveedor']);
         },

@@ -8,8 +8,8 @@ import { Proveedor } from '../models/proveedor';
   providedIn: 'root'
 })
 export class ProveedorService {
+  
   constructor(private http: HttpClient) { }
-
 
   listarProveedoresActivos(): Observable<any[]> {
     return this.http.get<any[]>(`${baserUrl}/proveedor/activadas`);
@@ -19,7 +19,6 @@ export class ProveedorService {
     return this.http.get<any[]>(`${baserUrl}/proveedor/desactivadas`);
   }
 
-
   agregarProveedor(proveedor: Proveedor): Observable<Proveedor> {
     return this.http.post<Proveedor>(`${baserUrl}/proveedor/`, proveedor);
   }
@@ -27,7 +26,6 @@ export class ProveedorService {
   actualizarProveedor(proveedorId: number, proveedor: any): Observable<any> {
     return this.http.put(`${baserUrl}/proveedor/${proveedorId}`, proveedor, {  });
   }
-
 
   obtenerProveedorPorId(proveedorId: number): Observable<any> {
     return this.http.get(`${baserUrl}/proveedor/${proveedorId}`);
@@ -40,6 +38,5 @@ export class ProveedorService {
   activarProveedor(proveedorId: number): Observable<any> {
     return this.http.post(`${baserUrl}/proveedor/activar/${proveedorId}`, {});
   }
-
 
 }

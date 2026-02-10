@@ -68,9 +68,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { EntradasComponent } from './pages/admin/entradas/entradas.component';
 import { RegistrarEntradaComponent } from './pages/admin/entradas/registrar-entrada/registrar-entrada.component';
 import { DetalleEntradaComponent } from './pages/admin/entradas/detalle-entrada/detalle-entrada.component';
-import { SalidasComponent } from './pages/admin/salidas/salidas.component';
-import { RegistrarSalidasComponent } from './pages/admin/salidas/registrar-salidas/registrar-salidas.component';
-import { DetalleSalidasComponent } from './pages/admin/salidas/detalle-salidas/detalle-salidas.component';
+import { SalidasComponent } from './features/admin/salidas/salidas.component';
+import { RegistrarSalidasComponent } from './features/admin/salidas/registrar-salidas/registrar-salidas.component';
+import { DetalleSalidasComponent } from './features/admin/salidas/detalle-salidas/detalle-salidas.component';
 
 import { SalidaUsuarioComponent } from './pages/usuario/salida-usuario/salida-usuario.component';
 import { EntradaUsuarioComponent } from './pages/usuario/entrada-usuario/entrada-usuario.component';
@@ -80,8 +80,8 @@ import { ActualizarUsuarioComponent } from './features/admin/usuario/actualizar-
 import { NosotrosComponent } from './pages/empresa/nosotros/nosotros.component';
 import { ListarReclamoActivadosComponent } from './features/admin/reclamos/listar-reclamo-activados/listar-reclamo-activados.component';
 import { ListarReclamoDesactivadosComponent } from './features/admin/reclamos/listar-reclamo-desactivados/listar-reclamo-desactivados.component';
-import { GuardarReclamoComponent } from './pages/admin/reclamos/guardar-reclamo/guardar-reclamo.component';
-import { ResponderCorreoComponent } from './pages/admin/reclamos/responder-correo/responder-correo.component';
+import { GuardarReclamoComponent } from './features/admin/reclamos/guardar-reclamo/guardar-reclamo.component';
+import { ResponderCorreoComponent } from './features/admin/reclamos/responder-correo/responder-correo.component';
 import { PerfilUsuarioComponent } from './pages/usuario/perfil-usuario/perfil-usuario.component';
 import { ActualizarUsuarioUsuarioComponent } from './pages/usuario/actualizar-usuario-usuario/actualizar-usuario-usuario.component';
 import { DetalleEntradaUsuarioComponent } from './pages/usuario/entrada-usuario/detalle-entrada-usuario/detalle-entrada-usuario.component';
