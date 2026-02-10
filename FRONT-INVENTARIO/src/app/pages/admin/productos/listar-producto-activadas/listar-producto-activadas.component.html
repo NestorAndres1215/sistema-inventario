@@ -1,67 +1,30 @@
-<body>
-  <div class="container">
-    <h1><i class="fas fa-box"></i> Lista de Productos Activados</h1>
-    <hr>
-    <div class="button-container">
-      <button class="btn-action" [routerLink]="'/admin/producto/crear-producto'">
-        <i class="fas fa-plus-circle"></i> Registrar Producto
-      </button>
-      <button class="btn-action" (click)="descargarPDF()">
-        <i class="fas fa-file-pdf"></i> Generar Reporte
-      </button>
+<div class="container">
+  <div class="row g-3 mt-4 mb-4">
+    <div class="col-12 col-md-6">
+      <app-button [routerLink]="'/admin/producto/crear-producto'" label="Registrar" icon="fas fa-user-plus"
+        color="button">
+      </app-button>
     </div>
 
-    <div class="search-container">
-      <mat-form-field>
-        <mat-icon matPrefix>search</mat-icon>
-        <input matInput [(ngModel)]="nombre" placeholder="Buscar Nombre" (input)="buscarPorNombre()">
-      </mat-form-field>
+    <div class="col-12 col-md-6">
+      <app-button label="Reporte" icon="fas fa-file-pdf" color="button" (click)="descargarPDF()">
+      </app-button>
     </div>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th><i class="fas fa-hashtag"></i> Código</th>
-          <th><i class="fas fa-store"></i> Nombre</th>
-          <th><i class="fas fa-file-alt"></i> Descripción</th>
-          <th><i class="fas fa-dollar-sign"></i> Precio</th>
-          <th><i class="fas fa-sort-numeric-up"></i> Stock</th>
-          <th><i class="fas fa-map-marker-alt"></i> Ubicación</th>
-          <th><i class="fas fa-truck"></i> Proveedor</th>
-          <th><i class="fas fa-cogs"></i> Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let producto of productos | slice: (paginator.pageIndex * paginator.pageSize):(paginator.pageIndex + 1) * paginator.pageSize">
-          <td>{{ producto.productoId }}</td>
-          <td>{{ producto.nombre }}</td>
-          <td>{{ producto.descripcion }}</td>
-          <td>{{ "S/." + producto.precio }}</td>
-          <td>{{ producto.stock }}</td>
-          <td>{{ producto.ubicacion }}</td>
-          <td>{{ producto.proveedor.nombre }}</td>
-          <td>
-            <button class="btn-table btn-details" [routerLink]="'/admin/producto/detalle/' + producto.productoId">
-              <i class="fas fa-info-circle"></i>
-            </button>&nbsp;
-            <button class="btn-table btn-edit" [routerLink]="'/admin/producto/' + producto.productoId">
-              <i class="fas fa-pencil-alt"></i>
-            </button>&nbsp;
-            <button class="btn-table btn-delete" (click)="desactivarProducto(producto.productoId)">
-              <i class="fas fa-trash"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <!-- Paginador -->
-    <mat-paginator
-      [length]="productos.length"
-      [pageSize]="pageSize"
-      [pageIndex]="pageIndex"
-      (page)="onPageChange($event)"
-      #paginator>
-    </mat-paginator>
   </div>
-</body>
+
+  <div class="search-container">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput type="search" placeholder="Buscar por nombre" [(ngModel)]="nombre" (input)="buscarPorNombre()"
+        autocomplete="off">
+    </mat-form-field>
+  </div>
+
+  <app-tabla [columnas]="columnas" [datos]="productos" [botonesConfig]="botonesConfig" (ver)="verProducto($event)"
+    (desactivar)="desactivarProducto($event)">
+  </app-tabla>
+
+  <mat-paginator [length]="productos.length" [pageSize]="pageSize" [pageIndex]="pageIndex" (page)="onPageChange($event)"
+    #paginator>
+  </mat-paginator>
+</div>

@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import baserUrl from 'src/app/core/models/helper';
-import { API_ENDPOINTS } from 'src/app/core/constants/api-endpoints';
-import { ReportesValidator } from 'src/app/core/validator/reportes.validator';
 
 @Injectable({
   providedIn: 'root'
@@ -11,42 +9,33 @@ import { ReportesValidator } from 'src/app/core/validator/reportes.validator';
 export class ReportesService {
   constructor(private http: HttpClient) {}
 
-  /** ========================
-   *  DESCARGAR REPORTES PDF
-   * ======================== */
-
   descargarSalida(): Observable<Blob> {
-    return this.descargarReporte(API_ENDPOINTS.reportes.salidas);
+    return this.descargarReporte('/pdf/generar-salidas');
   }
 
   descargarEntrada(): Observable<Blob> {
-    return this.descargarReporte(API_ENDPOINTS.reportes.entradas);
+    return this.descargarReporte('/pdf/generar-entradas');
   }
 
   descargarProveedor(): Observable<Blob> {
-    return this.descargarReporte(API_ENDPOINTS.reportes.proveedores);
+    return this.descargarReporte('/pdf/generar-proveedor');
   }
 
   descargarProducto(): Observable<Blob> {
-    return this.descargarReporte(API_ENDPOINTS.reportes.productos);
+    return this.descargarReporte('/pdf/generar-productos');
   }
 
   descargarUsuarioAdmin(): Observable<Blob> {
-    return this.descargarReporte(API_ENDPOINTS.reportes.usuariosAdmin);
+    return this.descargarReporte('/pdf/generar-administrador');
   }
 
   descargarUsuarioOperador(): Observable<Blob> {
-    return this.descargarReporte(API_ENDPOINTS.reportes.usuariosOperador);
+    return this.descargarReporte('/pdf/generar-operador');
   }
 
-  /** ========================
-   *  MÉTODO REUTILIZABLE
-   * ======================== */
   private descargarReporte(endpoint: string): Observable<Blob> {
-    if (!ReportesValidator.esRutaValida(endpoint)) {
-      throw new Error('Ruta de reporte inválida');
-    }
     const url = `${baserUrl}${endpoint}`;
     return this.http.get(url, { responseType: 'blob' });
   }
+
 }

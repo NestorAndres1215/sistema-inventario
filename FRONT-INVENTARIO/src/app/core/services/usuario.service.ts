@@ -28,7 +28,6 @@ export class UsuarioService {
     return this.http.get(`${baserUrl}/usuarios/normal/desactivadas`);
   }
 
-
   registrarAdmin(user: any): Observable<any> {
     return this.http.post(`${baserUrl}/usuarios/guardar-admin`, user);
   }

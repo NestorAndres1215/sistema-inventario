@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PrincipalComponent } from './features/admin/principal/principal.component';
 import { PerfilComponent } from './features/admin/perfil/perfil.component';
-import { ProveedorComponent } from './pages/admin/proveedor/proveedor.component';
+import { ProveedorComponent } from './features/admin/proveedor/proveedor.component';
 import { ProductosComponent } from './pages/admin/productos/productos.component';
 
 import { ConfiguracionComponent } from './features/admin/configuracion/configuracion.component';
@@ -15,13 +15,13 @@ import { ConfiguracionComponent } from './features/admin/configuracion/configura
 import { CrearProductoComponent } from './pages/admin/productos/crear-producto/crear-producto.component';
 import { ActualizarProductoComponent } from './pages/admin/productos/actualizar-producto/actualizar-producto.component';
 
-import { CrearProveedorComponent } from './pages/admin/proveedor/crear-proveedor/crear-proveedor.component';
-import { ActualizarProveedorComponent } from './pages/admin/proveedor/actualizar-proveedor/actualizar-proveedor.component';
+import { CrearProveedorComponent } from './features/admin/proveedor/crear-proveedor/crear-proveedor.component';
+import { ActualizarProveedorComponent } from './features/admin/proveedor/actualizar-proveedor/actualizar-proveedor.component';
 import { HomeUsuarioComponent } from './pages/usuario/home-usuario/home-usuario.component';
 import { RegistrarUsuarioAdministradorComponent } from './features/admin/usuario/usuario-administrador/registrar-usuario-administrador/registrar-usuario-administrador.component';
 import { RegistrarUsuarioOperadorComponent } from './features/admin/usuario/usuario-operador/registrar-usuario-operador/registrar-usuario-operador.component';
 import { DetalleUsuarioComponent } from './features/admin/usuario/detalle-usuario/detalle-usuario.component';
-import { DetalleProveedorComponent } from './pages/admin/proveedor/detalle-proveedor/detalle-proveedor.component';
+import { DetalleProveedorComponent } from './features/admin/proveedor/detalle-proveedor/detalle-proveedor.component';
 import { DetalleProductoComponent } from './pages/admin/productos/detalle-producto/detalle-producto.component';
 
 import { PrincipalUsuarioComponent } from './pages/usuario/principal-usuario/principal-usuario.component';
