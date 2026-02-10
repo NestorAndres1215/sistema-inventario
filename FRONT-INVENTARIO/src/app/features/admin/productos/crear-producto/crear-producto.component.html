@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="mt-4">
+    <app-titulo titulo="Registrar Productos"></app-titulo>
+  </div>
+  <form class="form-grid" [formGroup]="productoForm" (ngSubmit)="formSubmit()">
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label><i class="fas fa-box"></i> Nombre Producto</mat-label>
+          <input type="text" matInput placeholder="Digite el nombre del producto" formControlName="nombre">
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label><i class="fas fa-file-alt"></i> Descripción</mat-label>
+          <input type="text" matInput placeholder="Digite la descripción" formControlName="descripcion">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label><i class="fas fa-dollar-sign"></i> Precio</mat-label>
+          <input type="number" matInput placeholder="Digite el precio" formControlName="precio">
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label><i class="fas fa-sort-numeric-up"></i> Stock</mat-label>
+          <input type="number" matInput placeholder="Digite el stock" formControlName="stock">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label><i class="fas fa-map-marker-alt"></i> Ubicación</mat-label>
+          <input type="text" matInput placeholder="Digite la ubicación" formControlName="ubicacion">
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label><i class="fas fa-truck"></i> Proveedor</mat-label>
+          <mat-select formControlName="proveedorId">
+            <mat-option *ngFor="let proveedor of proveedores" [value]="proveedor.proveedorId">
+              {{ proveedor.nombre }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <app-button label="Registrar" icon="fas fa-user-plus" color="button">
+    </app-button>
+
+  </form>
+</div>
