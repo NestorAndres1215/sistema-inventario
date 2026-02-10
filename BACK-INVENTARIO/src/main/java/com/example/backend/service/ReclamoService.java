@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.dto.request.ReclamosRequest;
 import com.example.backend.entity.Reclamos;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 public interface ReclamoService {
     List<Reclamos> obtenerTodosLosReclamos();
 
-    Reclamos agregarReclamo(Reclamos reclamo);
+    Reclamos agregarReclamo(ReclamosRequest reclamo);
 
     Reclamos obtenerReclamoPorId(Long id);
 

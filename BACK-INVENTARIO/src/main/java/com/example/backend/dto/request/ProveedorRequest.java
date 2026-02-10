@@ -29,6 +29,10 @@ public class ProveedorRequest {
     @Size(max = 200, message = "La dirección no puede superar los 200 caracteres")
     private String direccion;
 
+    @NotBlank(message = "La dirección es obligatoria")
+    @Size(max = 200, message = "La dirección no puede superar los 200 caracteres")
+    private String contacto;
+
     @NotBlank(message = "El teléfono es obligatorio")
     @Pattern(regexp = "\\d{9}", message = "El teléfono debe tener 9 dígitos")
     private String telefono;

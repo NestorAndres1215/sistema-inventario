@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
+import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
@@ -22,7 +23,7 @@ public class ProductoRequest {
             regexp = "^\\d+(\\.\\d{1,2})?$",
             message = "El precio debe ser un número válido (ej: 10 o 10.50)"
     )
-    private String precio;
+    private BigDecimal precio;
 
     @NotBlank(message = "La descripción es obligatoria")
     @Size(min = 5, max = 255, message = "La descripción debe tener entre 5 y 255 caracteres")

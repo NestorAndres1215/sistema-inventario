@@ -126,12 +126,6 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Usuario listarCodigo(String codigo) {
-        return usuarioRepository.findById(codigo)
-                .orElseThrow(() -> new ResourceNotFoundException(NotFoundMessages.USUARIO_NO_ENCONTRADO));
-    }
-
-    @Override
     public List<Usuario> listarUsuarioAdminActivado() {
         return usuarioRepository.listarUsuarioAdminActivado();
     }
@@ -152,7 +146,6 @@ public class UsuarioServiceImpl implements UsuarioService {
     public List<Usuario> listarUsuarioNormalDesactivado() {
         return usuarioRepository.listarUsuarioNormalDesactivado();
     }
-
 
     @Override
     public Usuario listarPorId(Long id) {
@@ -247,7 +240,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     }
 
-@Override
+    @Override
     public boolean usuarioExistePorUsername(String username) {
         return usuarioRepository.existsByUsername(username);
     }

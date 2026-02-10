@@ -11,8 +11,9 @@ import com.example.backend.service.ProveedorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +30,8 @@ public class ProveedorServiceImpl implements ProveedorService {
                 .direccion(proveedorDTO.getDireccion())
                 .telefono(proveedorDTO.getTelefono())
                 .email(proveedorDTO.getEmail())
+                .fechaRegistro(LocalDate.now())
+                .contacto("")
                 .estado(true)
                 .build();
 

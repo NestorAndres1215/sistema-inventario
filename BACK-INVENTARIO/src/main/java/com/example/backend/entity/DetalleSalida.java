@@ -15,6 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
@@ -29,11 +30,23 @@ public class DetalleSalida {
 	@Column(name = "ds_id")
 	private Long detalleSalidaId;
 
-	@Column(name = "ds_cantidad")
+	@Column(name = "ds_cantidad", nullable = false)
 	private int cantidad;
 
 	@Column(name = "ds_descripcion")
 	private String descripcion;
+
+	@Column(name = "ds_precio_unitario", precision = 10, scale = 2, nullable = false)
+	private BigDecimal precioUnitario;
+
+	@Column(name = "ds_subtotal", precision = 10, scale = 2)
+	private BigDecimal subtotal;
+
+	@Column(name = "ds_stock_anterior")
+	private int stockAnterior;
+
+	@Column(name = "ds_stock_actual")
+	private int stockActual;
 
 	@ManyToOne
 	@JoinColumn(name = "ds_usuario", referencedColumnName = "us_codigo", nullable = false)

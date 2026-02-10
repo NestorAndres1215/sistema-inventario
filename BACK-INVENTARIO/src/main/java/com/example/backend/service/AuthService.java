@@ -7,7 +7,9 @@ import com.example.backend.entity.Usuario;
 import java.security.Principal;
 
 public interface AuthService {
+
     TokenResponse login(LoginRequest loginRequestDTO);
 
     Usuario actualUsuario(Principal principal);
+
 }

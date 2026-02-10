@@ -15,7 +15,7 @@ public interface UsuarioService {
 
     Usuario cambiarEstadoUsuario(Long usuarioId, boolean estado);
 
-    Usuario listarCodigo(String codigo);
+
 
     List<Usuario> listarUsuarioAdminActivado();
 

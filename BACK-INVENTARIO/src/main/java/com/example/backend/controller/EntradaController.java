@@ -5,20 +5,14 @@ import com.example.backend.service.DetalleEntradaService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.*;
-
-
 
 @RestController
 @RequestMapping("/entradas")
@@ -30,14 +24,12 @@ public class EntradaController {
 
     @PostMapping("/")
     public ResponseEntity<List<DetalleEntrada>> crearEntrada(@RequestBody List<DetalleEntrada> listaDetalleEntrada) {
-        List<DetalleEntrada> guardados = detalleEntradaService.crearDetalleEntrada(listaDetalleEntrada);
-        return ResponseEntity.ok(guardados);
+        return ResponseEntity.ok(detalleEntradaService.crearDetalleEntrada(listaDetalleEntrada));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<DetalleEntrada> obtenerPorId(@PathVariable Long id) {
-        DetalleEntrada detalle = detalleEntradaService.obtenerPorId(id);
-        return ResponseEntity.ok(detalle);
+        return ResponseEntity.ok(detalleEntradaService.obtenerPorId(id));
     }
 
     @GetMapping
@@ -48,7 +40,6 @@ public class EntradaController {
     @PutMapping("/{detalleEntradaId}")
     public ResponseEntity<DetalleEntrada> actualizar(@PathVariable Long detalleEntradaId,
                                                       @RequestBody DetalleEntrada detalleEntrada) {
-        DetalleEntrada actualizado = detalleEntradaService.actualizarDetalleEntrada(detalleEntradaId, detalleEntrada);
-        return ResponseEntity.ok(actualizado);
+        return ResponseEntity.ok(detalleEntradaService.actualizarDetalleEntrada(detalleEntradaId, detalleEntrada));
     }
 }

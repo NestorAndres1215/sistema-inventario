@@ -1,14 +1,16 @@
 package com.example.backend.service.impl;
 
 import com.example.backend.constants.NotFoundMessages;
+import com.example.backend.dto.request.ReclamosRequest;
 import com.example.backend.entity.Reclamos;
+import com.example.backend.entity.Usuario;
 import com.example.backend.repository.ReclamoRepository;
 import com.example.backend.service.ReclamoService;
+import com.example.backend.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -17,7 +19,7 @@ public class ReclamoServiceImpl implements ReclamoService {
 
     private final JavaMailSender javaMailSender;
     private final ReclamoRepository reclamoRepository;
-
+    private final UsuarioService usuarioService;
     private static final String ASUNTO_DISCULPAS = "Respuesta de disculpas para el reclamo #%d";
     private static final String SALUDO = "Estimado/a %s %s,\n\n";
     private static final String CUERPO_DISCULPAS = "Lamentamos profundamente los inconvenientes ocasionados por su reclamo. "
@@ -32,8 +34,13 @@ public class ReclamoServiceImpl implements ReclamoService {
     }
 
     @Override
-    public Reclamos agregarReclamo(Reclamos reclamo) {
-        reclamo.setEstado(true);
+    public Reclamos agregarReclamo(ReclamosRequest request) {
+        Usuario usuario = usuarioService.listarPorId(request.getCodigo());
+        Reclamos reclamo = Reclamos.builder()
+                .asunto(request.getAsunto())
+                .usuario(usuario)
+                .estado(true)
+                .build();
         return reclamoRepository.save(reclamo);
     }
 
