@@ -1,44 +1,10 @@
-<body>
-  <div class="container">
-    <h1><i class="fas fa-info-circle"></i> Detalle de Producto</h1>
-    <hr />
-    <br />
-    <div class="row">
-      <div class="col-md-12">
-        <table class="table text-center" *ngIf="producto">
-          <tr>
-            <th colspan="2">Información del Producto</th>
-          </tr>
-          <tr>
-            <td><i class="fas fa-hashtag"></i> Código</td>
-            <td>{{ producto.productoId }}</td>
-          </tr>
-          <tr>
-            <td><i class="fas fa-box"></i> Nombre</td>
-            <td>{{ producto.nombre }}</td>
-          </tr>
-          <tr>
-            <td><i class="fas fa-file-alt"></i> Descripción</td>
-            <td>{{ producto.descripcion }}</td>
-          </tr>
-          <tr>
-            <td><i class="fas fa-dollar-sign"></i> Precio</td>
-            <td>S/. {{ producto.precio }}</td>
-          </tr>
-          <tr>
-            <td><i class="fas fa-sort-numeric-up"></i> Stock</td>
-            <td>{{ producto.stock }}</td>
-          </tr>
-          <tr>
-            <td><i class="fas fa-truck"></i> Proveedor</td>
-            <td>{{ producto.proveedor.nombre }}</td>
-          </tr>
-          <tr>
-            <td><i class="fas fa-toggle-on"></i> Estado</td>
-            <td>{{ producto.estado ? "Activo" : "Desactivado" }}</td>
-          </tr>
-        </table>
-      </div>
-    </div>
+<div class="container">
+ <app-titulo titulo="Detalle de Producto"></app-titulo>
+
+  <div class="row">
+    <app-tabla-datos
+      [titulo]="'Información del Producto'"
+      [datos]="datosProducto">
+    </app-tabla-datos>
   </div>
-</body>
+</div>

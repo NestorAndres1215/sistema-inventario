@@ -133,15 +133,15 @@ const routes: Routes = [
       {
         path: 'producto/crear-producto',
         component: CrearProductoComponent,
+      },      {
+        path: 'producto/detalle/:productoId',
+        component: DetalleProductoComponent,
       },
       {
         path: 'producto/:productoId',
         component: ActualizarProductoComponent,
       },
-      {
-        path: 'producto/detalle/:productoId',
-        component: DetalleProductoComponent,
-      },
+
       {
         path: 'usuario/operador',
         component: UsuarioOperadorComponent,

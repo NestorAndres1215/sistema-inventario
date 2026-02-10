@@ -1,45 +1,8 @@
-<body>
-  <div class="container">
-    <h1><i class="fas fa-info-circle"></i> Detalle de Proveedor</h1>
-    <hr />
-    <br />
-    <div class="row">
-      <div class="col-md-12">
-        <table class="table text-center" *ngIf="proveedor">
-          <tr>
-            <th colspan="2">Información de Proveedor</th>
-          </tr>
-         <tr>
-  <td><i class="fas fa-hashtag"></i> Código</td>
-  <td>{{ proveedor.proveedorId }}</td>
-</tr>
-<tr>
-  <td><i class="fas fa-user"></i> Nombre de Proveedor</td>
-  <td>{{ proveedor.nombre }}</td>
-</tr>
-<tr>
-  <td><i class="fas fa-phone"></i> Teléfono de Proveedor</td>
-  <td>{{ proveedor.telefono }}</td>
-</tr>
-<tr>
-  <td><i class="fas fa-id-card"></i> RUC de Proveedor</td>
-  <td>{{ proveedor.ruc }}</td>
-</tr>
-<tr>
-  <td><i class="fas fa-envelope"></i> Correo electrónico</td>
-  <td>{{ proveedor.email }}</td>
-</tr>
-<tr>
-  <td><i class="fas fa-map-marker-alt"></i> Dirección</td>
-  <td>{{ proveedor.direccion }}</td>
-</tr>
-<tr>
-  <td><i class="fas fa-toggle-on"></i> Estado</td>
-  <td>{{ proveedor.estado ? "Activo" : "Desactivado" }}</td>
-</tr>
+<div class="container">
+  <app-titulo titulo="Detalle de Proveedor"></app-titulo>
 
-        </table>
-      </div>
-    </div>
+  <div class="row">
+    <app-tabla-datos [titulo]="'Información de Contacto'" [datos]="datosUsuario"></app-tabla-datos>
   </div>
-</body>
+
+</div>

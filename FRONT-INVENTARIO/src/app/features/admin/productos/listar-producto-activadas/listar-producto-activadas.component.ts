@@ -92,6 +92,7 @@ export class ListarProductoActivadasComponent implements OnInit {
   }
 
   verProducto(producto: any) {
+    console.log(producto)
     this.router.navigate(['/admin/producto/detalle', producto.productoId]);
   }
 

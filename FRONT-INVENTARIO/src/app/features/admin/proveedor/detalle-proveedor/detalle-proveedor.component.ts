@@ -10,30 +10,42 @@ import { ProveedorService } from 'src/app/core/services/proveedor.service';
 export class DetalleProveedorComponent implements OnInit {
 
   proveedor: any;
-  proveedorId: any = 0;
+  proveedorId: number = 0;
+  datosUsuario: { clave: string; valor: any }[] = [];
+
   constructor(
-    private proveedorService:ProveedorService,
-    private router:Router,
-    private route:ActivatedRoute
-  ) { }
+    private proveedorService: ProveedorService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
   ngOnInit(): void {
     this.proveedorId = this.route.snapshot.params['proveedorId'];
-    console.log("llego id"+this.proveedorId);
-    console.log(this.route.snapshot.params);
     this.obtenerProveedorPorId(this.proveedorId);
-    
   }
 
   obtenerProveedorPorId(proveedorId: number): void {
     this.proveedorService.obtenerProveedorPorId(proveedorId).subscribe(
       (data) => {
         this.proveedor = data;
-        console.log(this.proveedor);
+
+        // 👇 aquí armamos los datos para app-tabla-datos
+       this.datosUsuario = [
+  { clave: 'Código', valor: this.proveedor.proveedorId },
+  { clave: 'Nombre', valor: this.proveedor.nombre },
+  { clave: 'Teléfono', valor: this.proveedor.telefono },
+  { clave: 'Correo', valor: this.proveedor.email },
+  { clave: 'RUC', valor: this.proveedor.ruc },
+  { clave: 'Dirección', valor: this.proveedor.direccion },
+  { clave: 'Estado', valor: this.proveedor.estado ? 'Activo' : 'Desactivado' }
+];
+
+
+        console.log(this.datosUsuario);
       },
       (error) => {
         console.log(error);
       }
     );
   }
-
 }
