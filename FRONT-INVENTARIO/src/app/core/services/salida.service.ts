@@ -8,6 +8,7 @@ import baserUrl from 'src/app/core/models/helper';
   providedIn: 'root'
 })
 export class SalidaService {
+  
   constructor(private http: HttpClient) {}
 
   listarSalidas(): Observable<any[]> {
@@ -15,13 +16,11 @@ export class SalidaService {
   }
 
   crearSalidaConDetalles(listaDetalleSalida: any[]): Observable<any> {
-    return this.http.post(`${baserUrl}/salidas`, listaDetalleSalida);
+    return this.http.post(`${baserUrl}/salidas/`, listaDetalleSalida);
   }
 
   actualizarDetalleSalida(detalleSalidaId: number, detalleSalida: any): Observable<any> {
-  
-    const url = `${baserUrl}/salidas/${detalleSalidaId}`;
-    return this.http.put(url, detalleSalida);
+    return this.http.put(`${baserUrl}/salidas/${detalleSalidaId}`, detalleSalida);
   }
 
   obtenerSalidaPorId(detalleSalidaId: number): Observable<any> {

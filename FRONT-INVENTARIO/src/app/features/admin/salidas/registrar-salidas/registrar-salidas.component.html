@@ -17,8 +17,8 @@
 
     <mat-form-field appearance="outline">
       <mat-label><i class="fas fa-box"></i> Producto</mat-label>
-      <mat-select formControlName="productoId">
-        <mat-option *ngFor="let prod of producto" [value]="prod.productoId">
+      <mat-select formControlName="producto">
+        <mat-option *ngFor="let prod of productos" [value]="prod">
           {{ prod.nombre }}
         </mat-option>
       </mat-select>

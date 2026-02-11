@@ -1,13 +1,10 @@
-export interface DetalleSalida {
-  producto: {
-    productoId: string;
-  };
-  descripcion: string;
+export interface Salida{
+  codigoSalida?: number;
+  codigoDetalle?: number;
+ producto: string;
   cantidad: number;
-  salida: {
-    fechaSalida: string;
-  };
-  usuario: {
-    id: string;
-  };
+  descripcion: string;
+  usuario: string;
+  fechaSalida: string;  
 }
+

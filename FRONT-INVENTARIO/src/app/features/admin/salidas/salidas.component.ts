@@ -39,6 +39,7 @@ verDetalle(item: any): void {
     this.salidaService.listarSalidas().subscribe({
       next: (data: any[]) => {
         this.salidas = data;
+        console.log(data)
       },
     });
   }

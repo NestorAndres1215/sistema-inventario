@@ -77,7 +77,7 @@ import { EntradaUsuarioComponent } from './pages/usuario/entrada-usuario/entrada
 import { ListarEntradasUsuarioComponent } from './pages/usuario/entrada-usuario/listar-entradas-usuario/listar-entradas-usuario.component';
 import { ListarSalidaUsuarioComponent } from './pages/usuario/salida-usuario/listar-salida-usuario/listar-salida-usuario.component';
 import { ActualizarUsuarioComponent } from './features/admin/usuario/actualizar-usuario/actualizar-usuario.component';
-import { NosotrosComponent } from './pages/empresa/nosotros/nosotros.component';
+import { NosotrosComponent } from './features/empresa/nosotros/nosotros.component';
 import { ListarReclamoActivadosComponent } from './features/admin/reclamos/listar-reclamo-activados/listar-reclamo-activados.component';
 import { ListarReclamoDesactivadosComponent } from './features/admin/reclamos/listar-reclamo-desactivados/listar-reclamo-desactivados.component';
 import { GuardarReclamoComponent } from './features/admin/reclamos/guardar-reclamo/guardar-reclamo.component';

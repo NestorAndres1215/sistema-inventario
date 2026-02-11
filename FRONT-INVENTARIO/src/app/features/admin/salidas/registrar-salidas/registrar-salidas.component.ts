@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DetalleSalida } from 'src/app/core/models/detalle-salidad';
+import { MENSAJES, TITULO_MESAJES } from 'src/app/core/constants/messages';
+import { Salida } from 'src/app/core/models/detalle-salidad';
+import { AlertService } from 'src/app/core/services/alert.service';
+
 import { LoginService } from 'src/app/core/services/login.service';
 import { ProductoService } from 'src/app/core/services/producto.service';
 import { SalidaService } from 'src/app/core/services/salida.service';
@@ -16,22 +19,23 @@ export class RegistrarSalidasComponent implements OnInit {
 
   salidaForm!: FormGroup;
   productos: any[] = [];
-  listaDetalleSalida: DetalleSalida[] = [];
-  user: any = null; 
-producto: any;
-isLoggedIn: any;
+  listaDetalleSalida: any[] = [];
+  user: any = null;
+  producto: any;
+  isLoggedIn: any;
 
   constructor(
     private fb: FormBuilder,
+    private alertSerrvice: AlertService,
     private productoService: ProductoService,
     private loginService: LoginService,
     private salidaService: SalidaService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.salidaForm = this.fb.group({
-      productoId: ['', Validators.required],
+      producto: ['', Validators.required],
       descripcion: ['', Validators.required],
       cantidad: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       fechaSalida: ['', Validators.required]
@@ -43,8 +47,9 @@ isLoggedIn: any;
 
   obtenerProducto(): void {
     this.productoService.listarProductosActivos().subscribe({
-      next: (data) => this.productos = data,
-      error: (err) => console.error('Error al obtener productos:', err)
+      next: (data) => {
+        this.productos = data
+      },
     });
   }
 
@@ -54,55 +59,51 @@ isLoggedIn: any;
 
   agregarProducto(): void {
     if (this.salidaForm.invalid) {
-      Swal.fire('Campos incompletos', 'Complete todos los campos antes de agregar.', 'warning');
+      this.alertSerrvice.advertencia(TITULO_MESAJES.ADVERTENCIA, MENSAJES.CAMPOS_INCOMPLETOS_MENSAJE);
       return;
     }
 
-    const { productoId, descripcion, cantidad, fechaSalida } = this.salidaForm.value;
+    const { producto, descripcion, cantidad, fechaSalida } = this.salidaForm.value;
 
-    // 1️⃣ Verificar si el producto ya fue agregado
-    if (this.listaDetalleSalida.some(d => d.producto.productoId === productoId)) {
-      Swal.fire('Advertencia', 'Este producto ya fue agregado en la salida.', 'warning');
+    if (this.listaDetalleSalida.some(d => d.producto.nombre === producto)) {
+      this.alertSerrvice.advertencia(TITULO_MESAJES.ADVERTENCIA, "PRODUCTO YA HA SIDO REGISTRADO");
       return;
     }
 
-    const detalle: DetalleSalida = {
-      producto: { productoId },
-      descripcion,
-      cantidad,
-      salida: { fechaSalida },
-      usuario: { id: this.user.id }
+
+
+    console.log(this.loginService.getUser())
+    const detalle: Salida = {
+      cantidad: cantidad,
+      descripcion: descripcion,
+      usuario: this.loginService.getUser().username,
+      producto: producto.nombre,
+      fechaSalida: fechaSalida
     };
 
     this.listaDetalleSalida.push(detalle);
 
-    Swal.fire({
-      icon: 'success',
-      title: 'Producto agregado',
-      timer: 1200,
-      showConfirmButton: false
-    });
 
-    this.salidaForm.reset({ fechaSalida }); // Mantener la fecha para agregar más rápido
+    this.alertSerrvice.aceptacion(TITULO_MESAJES.REGISTRO_EXITOSO_TITULO, MENSAJES.REGISTRO_EXITOSO_MENSAJE);
+    this.salidaForm.reset({ fechaSalida }); 
   }
 
   enviarSalida(): void {
     if (this.listaDetalleSalida.length === 0) {
-      Swal.fire('Sin registros', 'Agregue al menos un producto antes de enviar.', 'warning');
+      this.alertSerrvice.advertencia('Sin registros', 'Agregue al menos un producto antes de enviar.');
       return;
     }
 
     this.salidaService.crearSalidaConDetalles(this.listaDetalleSalida)
       .subscribe({
         next: () => {
-          Swal.fire('Éxito', 'La salida se ha registrado correctamente', 'success');
+         this.alertSerrvice.aceptacion('Éxito', 'La salida se ha registrado correctamente');
           this.listaDetalleSalida = [];
           this.salidaForm.reset();
           this.router.navigate(['/admin/salidas']);
         },
         error: (err) => {
-          console.error(err);
-          Swal.fire('Error', 'Hubo un problema al registrar la salida', 'error');
+          this.alertSerrvice.error('Error', 'Hubo un problema al registrar la salida');
         }
       });
   }
