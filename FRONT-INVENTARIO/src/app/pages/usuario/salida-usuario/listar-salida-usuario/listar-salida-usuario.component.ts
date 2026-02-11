@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ReportesService } from 'src/app/core/services/reportes.service';
 import { SalidaService } from 'src/app/core/services/salida.service';
 
@@ -11,9 +12,13 @@ import { SalidaService } from 'src/app/core/services/salida.service';
 export class ListarSalidaUsuarioComponent implements OnInit {
 
   detalleSalida: any[] = [];
- 
- 
-  constructor(private http: HttpClient,
+ verDetalle(item: any): void {
+  this.router.navigate(['/user-dashboard/salidas/detalle', item.detalleSalidaId]);
+}
+ botonesConfig = {
+  ver: true
+};
+  constructor(private router: Router,
     private salidaService: SalidaService,
     private reporteSalida:ReportesService
   ) { }
@@ -31,12 +36,17 @@ obtenerSalida(): void {
     error: (error: any) => {
       console.error("Error al obtener las salidas:", error);
     },
-    complete: () => {
-      console.log("Listado de salidas cargado correctamente.");
-    }
+
   });
 }
-
+columnas = [
+  { clave: 'detalleSalidaId', etiqueta: 'Código' },
+  { clave: 'producto.nombre', etiqueta: 'Producto' },
+  { clave: 'descripcion', etiqueta: 'Descripción' },
+  { clave: 'cantidad', etiqueta: 'Cantidad' },
+  { clave: 'salida.fechaSalida', etiqueta: 'Fecha de Salida' },
+  { clave: 'usuario.nombre', etiqueta: 'Responsable' }
+];
 
   descargarPDF() {
     this.reporteSalida.descargarSalida().subscribe((data: Blob) => {
