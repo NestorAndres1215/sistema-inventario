@@ -3,7 +3,7 @@
     <app-titulo titulo="Registar Salida"></app-titulo>
   </div>
 
-<form [formGroup]="salidaForm" (ngSubmit)="enviarSalida()">
+<form [formGroup]="salidaForm" >
   <div class="container">
     <div class="row g-3">
 
@@ -54,7 +54,7 @@
     </div>
    <div class="row g-3">
         <div class="col-12 col-md-6">
-            <app-button  label="Registrar Salida" icon="fas fa-user-plus" color="button">
+            <app-button  label="Registrar Salida" icon="fas fa-user-plus" color="button" (click)="enviarSalida()">
             </app-button>
         </div>
 

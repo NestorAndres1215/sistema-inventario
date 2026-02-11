@@ -12,7 +12,21 @@ import { ReportesService } from 'src/app/core/services/reportes.service';
   styleUrls: ['./listar-inventario.component.css']
 })
 export class ListarInventarioComponent implements OnInit {
-
+  botonesConfig = {
+    ver: true,
+    editar: true,
+    desactivar: true
+  };
+  
+  columnas = [
+    { clave: 'productoId', etiqueta: 'Código' },
+    { clave: 'nombre', etiqueta: 'Nombre' },
+    { clave: 'descripcion', etiqueta: 'Descripción' },
+    { clave: 'precio', etiqueta: 'Precio' },
+    { clave: 'stock', etiqueta: 'Stock' },
+    { clave: 'ubicacion', etiqueta: 'Ubicación' },
+    { clave: 'proveedor.nombre', etiqueta: 'Proveedor' }
+  ];
   nombre: string = '';
   producto: any = [];
   categoriaId: string = '';
@@ -122,5 +136,8 @@ export class ListarInventarioComponent implements OnInit {
       document.body.removeChild(a);
     });
   }
-
+  actualizar(producto: any) {
+    console.log(producto)
+    this.router.navigate(['/user-dashboard/inventario/', producto.productoId]);
+  }
 }

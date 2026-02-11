@@ -37,14 +37,13 @@ import { RegistrarSalidasComponent } from './features/admin/salidas/registrar-sa
 import { DetalleSalidasComponent } from './features/admin/salidas/detalle-salidas/detalle-salidas.component';
 
 import { EntradaUsuarioComponent } from './pages/usuario/entrada-usuario/entrada-usuario.component';
-import { SalidaUsuarioComponent } from './pages/usuario/salida-usuario/salida-usuario.component';
+import { SalidaUsuarioComponent } from './features/usuario/salida-usuario/salida-usuario.component';
 import { ActualizarUsuarioComponent } from './features/admin/usuario/actualizar-usuario/actualizar-usuario.component';
 import { ResponderCorreoComponent } from './features/admin/reclamos/responder-correo/responder-correo.component';
 import { ActualizarUsuarioUsuarioComponent } from './pages/usuario/actualizar-usuario-usuario/actualizar-usuario-usuario.component';
 import { DetalleEntradaUsuarioComponent } from './pages/usuario/entrada-usuario/detalle-entrada-usuario/detalle-entrada-usuario.component';
 import { ActualizarInventarioComponent } from './pages/usuario/inventario-usuario/actualizar-inventario/actualizar-inventario.component';
 import { GuardarInventarioComponent } from './pages/usuario/inventario-usuario/guardar-inventario/guardar-inventario.component';
-import { RegistarSalidaUsuarioComponent } from './pages/usuario/salida-usuario/registar-salida-usuario/registar-salida-usuario.component';
 import { RegistrarEntradaUsuarioComponent } from './pages/usuario/entrada-usuario/registrar-entrada-usuario/registrar-entrada-usuario.component';
 import { AdminGuard } from './core/guards/admin.guard';
 import { NormalGuard } from './core/guards/normal.guard';
@@ -52,6 +51,7 @@ import { ListaUsuarioAdministradorDesactivadosComponent } from './features/admin
 import { UsuarioAdministradorComponent } from './features/admin/usuario/usuario-administrador/usuario-administrador.component';
 import { UsuarioOperadorComponent } from './features/admin/usuario/usuario-operador/usuario-operador.component';
 import { ListaUsuarioOperadorDesactivadosComponent } from './features/admin/usuario/usuario-operador/lista-usuario-operador-desactivados/lista-usuario-operador-desactivados.component';
+import { RegistarSalidaUsuarioComponent } from './features/usuario/salida-usuario/registar-salida-usuario/registar-salida-usuario.component';
 
 const routes: Routes = [
   {
@@ -229,7 +229,7 @@ const routes: Routes = [
         component: SalidaUsuarioComponent,
       },
       {
-        path: 'salidas-usuario/registrar-salidas',
+        path: 'salidas/registrar-salidas',
         component: RegistarSalidaUsuarioComponent,
       },
 

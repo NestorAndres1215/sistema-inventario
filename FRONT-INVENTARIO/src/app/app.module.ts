@@ -72,10 +72,9 @@ import { SalidasComponent } from './features/admin/salidas/salidas.component';
 import { RegistrarSalidasComponent } from './features/admin/salidas/registrar-salidas/registrar-salidas.component';
 import { DetalleSalidasComponent } from './features/admin/salidas/detalle-salidas/detalle-salidas.component';
 
-import { SalidaUsuarioComponent } from './pages/usuario/salida-usuario/salida-usuario.component';
+import { SalidaUsuarioComponent } from './features/usuario/salida-usuario/salida-usuario.component';
 import { EntradaUsuarioComponent } from './pages/usuario/entrada-usuario/entrada-usuario.component';
 import { ListarEntradasUsuarioComponent } from './pages/usuario/entrada-usuario/listar-entradas-usuario/listar-entradas-usuario.component';
-import { ListarSalidaUsuarioComponent } from './pages/usuario/salida-usuario/listar-salida-usuario/listar-salida-usuario.component';
 import { ActualizarUsuarioComponent } from './features/admin/usuario/actualizar-usuario/actualizar-usuario.component';
 import { NosotrosComponent } from './features/empresa/nosotros/nosotros.component';
 import { ListarReclamoActivadosComponent } from './features/admin/reclamos/listar-reclamo-activados/listar-reclamo-activados.component';
@@ -87,13 +86,14 @@ import { ActualizarUsuarioUsuarioComponent } from './pages/usuario/actualizar-us
 import { DetalleEntradaUsuarioComponent } from './pages/usuario/entrada-usuario/detalle-entrada-usuario/detalle-entrada-usuario.component';
 import { ActualizarInventarioComponent } from './pages/usuario/inventario-usuario/actualizar-inventario/actualizar-inventario.component';
 import { GuardarInventarioComponent } from './pages/usuario/inventario-usuario/guardar-inventario/guardar-inventario.component';
-import { RegistarSalidaUsuarioComponent } from './pages/usuario/salida-usuario/registar-salida-usuario/registar-salida-usuario.component';
 import { RegistrarEntradaUsuarioComponent } from './pages/usuario/entrada-usuario/registrar-entrada-usuario/registrar-entrada-usuario.component';
 import { authInterceptorProviders } from './core/interceptors/auth.interceptor';
 import { ButtonComponent } from './shared/button/button.component';
 import { TituloComponent } from './shared/titulo/titulo.component';
 import { TablaDatosComponent } from './shared/tabla-datos/tabla-datos.component';
 import { TablaComponent } from './shared/tabla/tabla.component';
+import { ListarSalidaUsuarioComponent } from './features/usuario/salida-usuario/listar-salida-usuario/listar-salida-usuario.component';
+import { RegistarSalidaUsuarioComponent } from './features/usuario/salida-usuario/registar-salida-usuario/registar-salida-usuario.component';
 
 @NgModule({
   declarations: [
