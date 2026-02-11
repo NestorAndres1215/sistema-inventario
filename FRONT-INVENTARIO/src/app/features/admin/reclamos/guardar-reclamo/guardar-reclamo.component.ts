@@ -47,7 +47,7 @@ export class GuardarReclamoComponent implements OnInit {
     };
 
     this.reclamoService.agregarReclamo(entrada).subscribe({
-      next: (response) => {
+      next: () => {
         Swal.fire('Éxito', 'La entrada se ha enviado correctamente.', 'success');
         this.reclamoForm.reset();
         this.router.navigate(['/user-dashboard/configuracion']);
@@ -55,9 +55,7 @@ export class GuardarReclamoComponent implements OnInit {
       error: (error) => {
         Swal.fire('Error', 'Hubo un problema al enviar la entrada. Por favor, inténtalo de nuevo.', 'error');
       },
-      complete: () => {
-        console.log('Petición de reclamo finalizada.');
-      }
+
     });
 
   }

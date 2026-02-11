@@ -24,7 +24,7 @@ import { DetalleUsuarioComponent } from './features/admin/usuario/detalle-usuari
 import { DetalleProveedorComponent } from './features/admin/proveedor/detalle-proveedor/detalle-proveedor.component';
 import { DetalleProductoComponent } from './features/admin/productos/detalle-producto/detalle-producto.component';
 
-import { PrincipalUsuarioComponent } from './pages/usuario/principal-usuario/principal-usuario.component';
+import { PrincipalUsuarioComponent } from './features/usuario/principal-usuario/principal-usuario.component';
 import { InventarioUsuarioComponent } from './pages/usuario/inventario-usuario/inventario-usuario.component';
 
 import { ConfiguracionUsuarioComponent } from './pages/usuario/configuracion-usuario/configuracion-usuario.component';

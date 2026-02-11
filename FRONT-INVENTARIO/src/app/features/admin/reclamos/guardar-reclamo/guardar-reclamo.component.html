@@ -1,42 +1,46 @@
-<body>
-  <div class="container">
-    <h1><i class="fas fa-exclamation-circle"></i> Enviar Reclamo</h1>
-    <hr>
-   <form class="form-single-column" [formGroup]="reclamoForm" (ngSubmit)="enviarEntrada()">
-
-    <div class="form-column">
-      <mat-form-field appearance="outline">
-        <mat-label>Usuario</mat-label>
-        <input matInput required disabled [value]="user.username">
-      </mat-form-field>
-    </div>
-
-    <div class="form-column">
-      <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input matInput required disabled [value]="user.email">
-      </mat-form-field>
-    </div>
-
-    <div class="form-column">
-      <mat-form-field appearance="outline" class="w100">
-        <mat-label>Asunto</mat-label>
-        <textarea matInput placeholder="Digite la descripción sobre su reclamo" rows="10" formControlName="asunto"></textarea>
-        <mat-error *ngIf="reclamoForm.controls['asunto'].hasError('required')">
-          El asunto es obligatorio
-        </mat-error>
-        <mat-error *ngIf="reclamoForm.controls['asunto'].hasError('minlength')">
-          El asunto debe tener al menos 10 caracteres
-        </mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="form-column">
-      <button type="submit" class="btn-action" [disabled]="reclamoForm.invalid">
-        <i class="fas fa-paper-plane"></i> Enviar Reclamo
-      </button>
-    </div>
-
-  </form>
+<div class="container">
+  <div class="mt-4">
+    <app-titulo titulo="Módulo de Reclamos"></app-titulo>
   </div>
-</body>
+
+
+  <form class="container mt-4" [formGroup]="reclamoForm" (ngSubmit)="enviarEntrada()">
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Usuario</mat-label>
+          <input matInput disabled [value]="user.username">
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Email</mat-label>
+          <input matInput disabled [value]="user.email">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Asunto</mat-label>
+          <textarea matInput rows="6" placeholder="Digite la descripción sobre su reclamo" formControlName="asunto">
+        </textarea>
+
+          <mat-error *ngIf="reclamoForm.controls['asunto'].hasError('required')">
+            El asunto es obligatorio
+          </mat-error>
+
+          <mat-error *ngIf="reclamoForm.controls['asunto'].hasError('minlength')">
+            El asunto debe tener al menos 10 caracteres
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <app-button label="Enviar" icon="fas fa-paper-plane" color="button">
+    </app-button>
+  </form>
+
+</div>

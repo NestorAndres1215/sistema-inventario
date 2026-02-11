@@ -50,7 +50,7 @@ import { UsuarioAdministradorComponent } from './features/admin/usuario/usuario-
 import { UsuarioOperadorComponent } from './features/admin/usuario/usuario-operador/usuario-operador.component';
 
 import { InventarioUsuarioComponent } from './pages/usuario/inventario-usuario/inventario-usuario.component';
-import { PrincipalUsuarioComponent } from './pages/usuario/principal-usuario/principal-usuario.component';
+import { PrincipalUsuarioComponent } from './features/usuario/principal-usuario/principal-usuario.component';
 import { ConfiguracionUsuarioComponent } from './pages/usuario/configuracion-usuario/configuracion-usuario.component';
 import { ListaUsuarioAdministradorDesactivadosComponent } from './features/admin/usuario/usuario-administrador/lista-usuario-administrador-desactivados/lista-usuario-administrador-desactivados.component';
 import { RegistrarUsuarioAdministradorComponent } from './features/admin/usuario/usuario-administrador/registrar-usuario-administrador/registrar-usuario-administrador.component';
@@ -82,7 +82,7 @@ import { ListarReclamoActivadosComponent } from './features/admin/reclamos/lista
 import { ListarReclamoDesactivadosComponent } from './features/admin/reclamos/listar-reclamo-desactivados/listar-reclamo-desactivados.component';
 import { GuardarReclamoComponent } from './features/admin/reclamos/guardar-reclamo/guardar-reclamo.component';
 import { ResponderCorreoComponent } from './features/admin/reclamos/responder-correo/responder-correo.component';
-import { PerfilUsuarioComponent } from './pages/usuario/perfil-usuario/perfil-usuario.component';
+import { PerfilUsuarioComponent } from './features/usuario/perfil-usuario/perfil-usuario.component';
 import { ActualizarUsuarioUsuarioComponent } from './pages/usuario/actualizar-usuario-usuario/actualizar-usuario-usuario.component';
 import { DetalleEntradaUsuarioComponent } from './pages/usuario/entrada-usuario/detalle-entrada-usuario/detalle-entrada-usuario.component';
 import { ActualizarInventarioComponent } from './pages/usuario/inventario-usuario/actualizar-inventario/actualizar-inventario.component';
