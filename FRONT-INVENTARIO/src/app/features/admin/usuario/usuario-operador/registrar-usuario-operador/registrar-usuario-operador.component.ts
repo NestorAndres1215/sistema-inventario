@@ -26,13 +26,11 @@ export class RegistrarUsuarioOperadorComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      telefono: ['', [Validators.required, Validators.maxLength(8)]],
-      dni: ['', [Validators.required, Validators.maxLength(8)]],
+      email: ['', [Validators.required]],
+      telefono: ['', [Validators.required]],
+      dni: ['', [Validators.required]],
       direccion: ['', Validators.required],
       fechaNacimiento: [''],
       edad: ['']
@@ -41,6 +39,7 @@ export class RegistrarUsuarioOperadorComponent implements OnInit {
 
 
   formSubmit() {
+    console.log(this.form.value)
     if (!this.form.valid) {
       this.alertService.advertencia(TITULO_MESAJES.CAMPOS_INCOMPLETOS_TITULO, MENSAJES.CAMPOS_INCOMPLETOS_MENSAJE);
       this.form.markAllAsTouched();
@@ -57,12 +56,13 @@ export class RegistrarUsuarioOperadorComponent implements OnInit {
       dni: this.form.value.dni,
       direccion: this.form.value.direccion,
       fechaNacimiento: this.form.value.fechaNacimiento,
-      edad: this.form.value.edad
+      edad: this.form.value.edad,
+      rol: 'NORMAL'
     };
     this.userService.registrarNormal(user).subscribe({
       next: () => {
         this.alertService.aceptacion(TITULO_MESAJES.REGISTRO_EXITOSO_TITULO, MENSAJES.REGISTRO_EXITOSO_MENSAJE);
-        this.router.navigate(['/admin/usuario']);
+        this.router.navigate(['/admin/usuario/operador']);
       },
       error: (error) => {
         this.alertService.error(TITULO_MESAJES.ERROR_TITULO, error.error.message);

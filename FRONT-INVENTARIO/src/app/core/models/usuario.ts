@@ -9,4 +9,5 @@ export interface Usuario {
   direccion: string;
   fechaNacimiento: string;
   edad: string;
+  rol:string
 }

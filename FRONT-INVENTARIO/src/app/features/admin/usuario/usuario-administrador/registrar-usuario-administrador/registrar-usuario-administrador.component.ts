@@ -53,13 +53,14 @@ export class RegistrarUsuarioAdministradorComponent implements OnInit {
       dni: this.form.value.dni,
       direccion: this.form.value.direccion,
       fechaNacimiento: this.form.value.fechaNacimiento,
-      edad: this.form.value.edad
+      edad: this.form.value.edad,
+      rol:'ADMIN'
     };
     
     this.userService.registrarAdmin(user).subscribe({
       next: () => {
         this.alertService.aceptacion(TITULO_MESAJES.REGISTRO_EXITOSO_TITULO, MENSAJES.REGISTRO_EXITOSO_MENSAJE);
-        this.router.navigate(['/admin/usuario']);
+        this.router.navigate(['/admin/usuario/admin']);
       },
       error: (error) => {
         this.alertService.error(TITULO_MESAJES.ERROR_TITULO, error.error.message);

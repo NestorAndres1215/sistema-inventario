@@ -11,23 +11,17 @@ export class DetalleSalidasComponent implements OnInit {
 
   detalleSalida: any;
   detalleSalidaId: any = 0;
+  datosUsuario: { clave: string; valor: any }[] = [];
 
   constructor(
     private salidaService: SalidaService,
-    private router: Router,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.detalleSalidaId = this.route.snapshot.params['detalleSalidaId'];
-    console.log("llego id" + this.detalleSalidaId);
-    console.log(this.route.snapshot.params);
     this.obtenerSalidaId(this.detalleSalidaId)
-
-
   }
-
-  datosUsuario: { clave: string; valor: any }[] = [];
 
   obtenerSalidaId(detalleSalidaId: number): void {
     this.salidaService.obtenerSalidaPorId(detalleSalidaId).subscribe({
