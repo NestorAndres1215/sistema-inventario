@@ -15,8 +15,6 @@ public interface UsuarioService {
 
     Usuario cambiarEstadoUsuario(Long usuarioId, boolean estado);
 
-
-
     List<Usuario> listarUsuarioAdminActivado();
 
     List<Usuario> listarUsuarioAdminDesactivado();

@@ -13,7 +13,7 @@ public class MailConfig {
 	@Bean
 	public JavaMailSender javaMailSender() {
 	    JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-	    // Configura las propiedades del servidor de correo
+
 	    mailSender.setHost("smtp.gmail.com");
 	    mailSender.setPort(587);
 	    mailSender.setUsername("atiroandres@gmail.com");

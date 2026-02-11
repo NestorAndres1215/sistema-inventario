@@ -23,8 +23,6 @@ public class UsuarioOperadorServicePDF {
 
 	private final UsuarioService usuarioRepository;
 
-
-
     public byte[] generarInformePdf() throws DocumentException {
 		List<Usuario> productosActivos = usuarioRepository.listarUsuarioNormalActivado();;
 
