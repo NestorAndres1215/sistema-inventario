@@ -20,8 +20,8 @@
     </mat-form-field>
   </div>
 
-  <app-tabla [columnas]="columnas" [datos]="productos" [botonesConfig]="botonesConfig" [onActualizar]="actualizar.bind(this)"
-    [onDesactivar]="desactivarProducto.bind(this)">
+  <app-tabla [columnas]="columnas" [datos]="productos" [botonesConfig]="botonesConfig"
+    [onActualizar]="actualizar.bind(this)" [onDesactivar]="desactivarProducto.bind(this)">
   </app-tabla>
 
   <mat-paginator [length]="productos.length" [pageSize]="pageSize" [pageIndex]="pageIndex" (page)="onPageChange($event)"

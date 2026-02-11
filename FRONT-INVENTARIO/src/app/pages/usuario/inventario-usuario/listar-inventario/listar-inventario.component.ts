@@ -13,8 +13,8 @@ import { ReportesService } from 'src/app/core/services/reportes.service';
 })
 export class ListarInventarioComponent implements OnInit {
   botonesConfig = {
-    ver: true,
-    editar: true,
+
+    actualizar: true,
     desactivar: true
   };
   
