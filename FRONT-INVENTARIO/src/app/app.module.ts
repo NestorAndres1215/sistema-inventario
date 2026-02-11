@@ -45,7 +45,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ListarProductoActivadasComponent } from './features/admin/productos/listar-producto-activadas/listar-producto-activadas.component';
 import { ListarProductoDesactivadasComponent } from './features/admin/productos/listar-producto-desactivadas/listar-producto-desactivadas.component';
 import { NavbarUsuarioComponent } from './shared/navbar-usuario/navbar-usuario.component';
-import { HomeUsuarioComponent } from './pages/usuario/home-usuario/home-usuario.component';
+import { HomeUsuarioComponent } from './features/usuario/home-usuario/home-usuario.component';
 import { UsuarioAdministradorComponent } from './features/admin/usuario/usuario-administrador/usuario-administrador.component';
 import { UsuarioOperadorComponent } from './features/admin/usuario/usuario-operador/usuario-operador.component';
 

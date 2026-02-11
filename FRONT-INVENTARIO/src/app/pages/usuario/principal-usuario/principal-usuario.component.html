@@ -1,40 +1,81 @@
-<body>
-  <div class="container">
-    <div class="header">
-      <h1 *ngIf="isLoggedIn && user"><i class="fas fa-user-shield"></i> Bienvenido Administrador {{ user.username }}</h1>
-    </div>
-    <hr>
-    <div class="welcome-section">
-      <div class="welcome-text">
-        <p>¡Bienvenido al Panel Administrativo de Super Xtra! Su rol es esencial para el éxito de nuestras operaciones de almacén.</p>
-        <p>Como administrador, liderará la gestión de inventario, usuarios, proveedores, ventas, compras y configuraciones, asegurando que todo funcione con precisión y eficiencia.</p>
-        <p>Gracias por su compromiso y dedicación con nuestra empresa.</p>
+
+
+    <app-titulo *ngIf="isLoggedIn && user" [titulo]="'Bienvenido Operador ' + user.username">
+    </app-titulo>
+
+    <div
+      class="bg-white bg-opacity-95 p-4 p-md-5 rounded-4 shadow-lg mb-4 d-flex flex-column flex-md-row align-items-center gap-3 animate-fadein">
+
+      <!-- Texto de bienvenida -->
+      <div class="flex-grow-1 fs-6 text-dark">
+        <p class="mb-3">
+          ¡Bienvenido al Panel Administrativo de Super Xtra! Su rol es esencial para el éxito de nuestras operaciones de
+          almacén.
+        </p>
+        <p class="mb-3">
+          Como administrador, liderará la gestión de inventario, usuarios, proveedores, ventas, compras y
+          configuraciones, asegurando que todo funcione con precisión y eficiencia.
+        </p>
+        <p>
+          Gracias por su compromiso y dedicación con nuestra empresa.
+        </p>
       </div>
-      <div class="logo-container">
-        <img src="../../../../assets/img/logo.png" alt="Super Xtra Logo" class="img-admin img-fluid">
+
+      <!-- Logo -->
+      <div class="flex-shrink-0 text-center text-md-start">
+        <img src="../../../../assets/img/logo.png" alt="Super Xtra Logo"
+          class="img-fluid rounded-4 border border-3 border-danger"
+          style="width:180px; height:180px; object-fit:contain; transition: transform 0.3s ease;"
+          onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
       </div>
+
     </div>
+
     <div class="functions-section">
-      <h2><i class="fas fa-tasks"></i> Funciones del Administrador</h2>
-      <div class="functions-grid">
-        <div class="function-card">
-          <i class="fas fa-boxes"></i>
-          <h3>Gestionar los Productos</h3>
+      <app-titulo titulo="Funciones del Administrador">
+      </app-titulo>
+      <div class="row g-4 bg-white bg-opacity-95 p-4 rounded-4 shadow-lg animate-fadein">
+
+        <div class="col-12 col-md-4">
+          <div class="card h-100 text-center p-4">
+            <i class="fas fa-boxes"></i>
+            <h3 class="mt-2">Gestionar los Productos</h3>
+          </div>
         </div>
 
-    
-        <div class="function-card">
-          <i class="fas fa-shopping-cart"></i>
-          <h3>Gestionar las Ventas</h3>
+        <div class="col-12 col-md-4">
+          <div class="card h-100 text-center p-4">
+            <i class="fas fa-users"></i>
+            <h3 class="mt-2">Gestionar los Usuarios</h3>
+          </div>
         </div>
-        <div class="function-card">
-          <i class="fas fa-shopping-bag"></i>
-          <h3>Gestionar las Compras</h3>
+
+        <div class="col-12 col-md-4">
+          <div class="card h-100 text-center p-4">
+            <i class="fas fa-truck"></i>
+            <h3 class="mt-2">Gestionar los Proveedores</h3>
+          </div>
         </div>
-        <div class="function-card">
-          <i class="fas fa-cogs"></i>
-          <h3>Gestionar las Configuraciones</h3>
+
+        <div class="col-12 col-md-4">
+          <div class="card h-100 text-center p-4">
+            <i class="fas fa-shopping-cart"></i>
+            <h3 class="mt-2">Gestionar las Ventas</h3>
+          </div>
         </div>
+
+        <div class="col-12 col-md-4">
+          <div class="card h-100 text-center p-4">
+            <i class="fas fa-shopping-bag"></i>
+            <h3 class="mt-2">Gestionar las Compras</h3>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="card h-100 text-center p-4">
+            <i class="fas fa-cogs"></i>
+            <h3 class="mt-2">Gestionar las Configuraciones</h3>
+          </div>
+        </div>
+
       </div>
-    </div>
-  </div>

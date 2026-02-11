@@ -17,7 +17,7 @@ import { ActualizarProductoComponent } from './features/admin/productos/actualiz
 
 import { CrearProveedorComponent } from './features/admin/proveedor/crear-proveedor/crear-proveedor.component';
 import { ActualizarProveedorComponent } from './features/admin/proveedor/actualizar-proveedor/actualizar-proveedor.component';
-import { HomeUsuarioComponent } from './pages/usuario/home-usuario/home-usuario.component';
+import { HomeUsuarioComponent } from './features/usuario/home-usuario/home-usuario.component';
 import { RegistrarUsuarioAdministradorComponent } from './features/admin/usuario/usuario-administrador/registrar-usuario-administrador/registrar-usuario-administrador.component';
 import { RegistrarUsuarioOperadorComponent } from './features/admin/usuario/usuario-operador/registrar-usuario-operador/registrar-usuario-operador.component';
 import { DetalleUsuarioComponent } from './features/admin/usuario/detalle-usuario/detalle-usuario.component';
